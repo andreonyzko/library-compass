@@ -107,11 +107,7 @@ public class LibraryApp {
 
     public static void listBook(){
         for(Book livro : livros){
-            System.out.println(livro.getTitulo());
-            System.out.println("Autor: " + livro.getAutor());
-            System.err.println("Ano de Publicação: " + livro.getAnoPublicacao());
-            System.out.println("Status: " + (livro.isDisponivel() ? "disponível" : "emprestado")); // Imprime o estado atual do livro através de uma condição ternária.
-            System.err.println();
+            System.out.println(livro.toString());
         }
     }
 
@@ -127,7 +123,7 @@ public class LibraryApp {
 
     public static void listUsers(){
         for(User usuario : usuarios){ // Para cada usuário na lista usuários, imprima:
-            System.out.printf("#%d - %s\n", usuario.getId(), usuario.getNome());
+            System.out.println(usuario.toString());
         }
     }
 
@@ -194,8 +190,8 @@ public class LibraryApp {
             return;
         }
 
-        System.out.printf("Livros emprestados para #%d %s:\n", usuario.getId(), usuario.getNome());
-        for(Book livro : usuario.getLivrosEmprestados()) System.out.printf("%s - %s (%d)\n", livro.getTitulo(), livro.getAutor(), livro.getAnoPublicacao()); // Para cada livro na lista de empréstimos do usuário, imprimi-lo;
+        System.out.printf("%s:\n", usuario.toString());
+        for(Book livro : usuario.getLivrosEmprestados()) System.out.println(livro.toStringOneLine()); // Para cada livro na lista de empréstimos do usuário, imprimi-lo;
     }
 
     public static Book findBook(String titulo){

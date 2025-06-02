@@ -51,9 +51,26 @@ public class Book {
         return (disponivel == BookStatus.DISPONIVEL ? true : false);
     }
 
+    @Override
+    public String toString(){
+        StringBuilder resposta = new StringBuilder(); // Cria uma nova string com o StringBuilder
+
+        // Estruturando a string
+        resposta.append(titulo + "\n");
+        resposta.append("Autor: " + autor + "\n");
+        resposta.append("Ano de Publicação: " + anoPublicacao + "\n");
+        resposta.append("Status: " + disponivel.toString().toLowerCase() + "\n");
+        
+        return resposta.toString();
+    }
+
+    public String toStringOneLine(){
+        return titulo + " - " + autor + " (" + anoPublicacao + ")";
+    }
+
     public boolean emprestar(){
         if(disponivel == BookStatus.DISPONIVEL){ // Se estiver disponível, inverte sua disponibilidade e imprime uma mensagem de empréstimo realizado
-            disponivel = BookStatus.DISPONIVEL;
+            disponivel = BookStatus.EMPRESTADO;
             System.out.println("Livro emprestado!");
             return true;
         }

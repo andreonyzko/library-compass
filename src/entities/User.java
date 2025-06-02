@@ -47,4 +47,9 @@ public class User {
             livrosEmprestados.remove(livro);
         }
     }
+
+    @Override
+    public String toString(){
+        return "#" + id + " - " + nome;
+    }
 }
