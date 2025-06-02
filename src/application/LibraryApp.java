@@ -44,7 +44,7 @@ public class LibraryApp {
                     break;
             
                 case 7: // 7- Listar livros emprestados por usuário
-                System.out.println("Listando livro por usuário...");
+                    booksUser(usuarios);
                     break;
             
                 default: // Opção inválida
@@ -137,4 +137,19 @@ public class LibraryApp {
 
         usuario.adicionarLivroEmprestado(livro); // Realiza o empréstimo
     }   
+
+    public static void booksUser(List<User> usuarios){
+        System.out.print("Nome do usuário: ");
+        String busca_usuario = read.nextLine();
+
+        User usuario = usuarios.stream().filter(x -> x.getNome().equals(busca_usuario)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual inserido acima, se não encontrar retorna nulo
+        if(usuario == null){
+            System.err.println("Usuário não encontrado!");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("Livros emprestados: ");
+        for(Book livro : usuario.getLivrosEmprestados()) System.out.printf("%s - %s (%d)\n", livro.getTitulo(), livro.getAutor(), livro.getAnoPublicacao());
+    }
 }
