@@ -88,7 +88,7 @@ public class LibraryApp {
         String titulo = read.nextLine();
 
         // Tenta encontrar um livro já cadastrado com este título, o ideal é retornar nulo, ou seja, não ter
-        if(livros.stream().filter(x -> x.getTitulo().toLowerCase().equals(titulo.toLowerCase())).findFirst().orElse(null) != null){
+        if(livros.stream().filter(x -> x.getTitulo().equalsIgnoreCase(titulo)).findFirst().orElse(null) != null){
             System.out.println("Esse título já está cadastrado!");
             return;
         }
@@ -203,7 +203,7 @@ public class LibraryApp {
     }
 
     public static Book findBook(String titulo){
-        return livros.stream().filter(x -> x.getTitulo().toLowerCase().equals(titulo.toLowerCase())).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de livro que tenha o título igual a da busca, se não encontrar retorna nulo. Para isso, transforma-se tanto a string do objeto quanto da procura para lowercased.
+        return livros.stream().filter(x -> x.getTitulo().equalsIgnoreCase(titulo)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de livro que tenha o título igual a da busca, se não encontrar retorna nulo. Para isso, ignora-se as diferenças de minúscula e maísculas.
     }
 
     public static User findUser(){
