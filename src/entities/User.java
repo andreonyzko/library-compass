@@ -8,9 +8,9 @@ public class User {
     private int id;
     private List<Book> livrosEmprestados;
 
-    public User(String nome, List<User> usuarios) {
+    public User(String nome, int id) {
         this.nome = nome;
-        this.id = usuarios.size()+1; // Coleta o tamanho da lista de usuários cadastrados, incrementa um, para definir ids de usuários de forma incremental.
+        this.id = id;
         this.livrosEmprestados = new ArrayList<>(); // Instancia uma nova lista de livros vazia, assim o cadastro do usuário inicia com nenhum empréstimo na biblioteca
     }
 

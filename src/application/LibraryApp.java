@@ -101,7 +101,15 @@ public class LibraryApp {
         System.out.print("Nome: ");
         String nome = read.nextLine();
 
-        usuarios.add(new User(nome, usuarios)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto.
+        System.out.print("ID: ");
+        int id = read.nextInt();
+
+        if(usuarios.stream().filter(x -> x.getId() == id).findFirst().orElse(null) != null){
+            System.out.println("Já existe um usuário com esse ID cadastrado");
+            return;
+        }
+
+        usuarios.add(new User(nome, id)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto.
         System.out.println("\nUsuário cadastrado com sucesso!");
     }
 
@@ -122,8 +130,7 @@ public class LibraryApp {
             return;
         }
 
-        System.out.print("Nome do usuário: ");
-        User usuario = findUser(read.nextLine()); // Função para buscar usuário, retorna referencia do objeto ou nulo.
+        User usuario = findUser(); // Função para buscar usuário, retorna referencia do objeto ou nulo.
         
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
@@ -136,15 +143,14 @@ public class LibraryApp {
     public static void giveBackBook(){
         System.out.println("REALIZAR DEVOLUÇÃO");
 
-        System.out.print("Nome do usuário: ");
-        User usuario = findUser(read.nextLine()); // Função para buscar usuario, retorna referencia do objeto ou nulo.
+        User usuario = findUser(); // Função para buscar usuario, retorna referencia do objeto ou nulo.
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
             return;
         }
         
         System.out.print("Título do livro: ");
-        Book livro = findBook(read.nextLine()); // Função para buscar livro, retorna referencia do objeto ou nulo.
+        Book livro = usuario.getLivrosEmprestados().stream().filter(x -> x.getTitulo().toLowerCase().equals(read.nextLine())).findFirst().orElse(null); // Busca um objeto livro que possua o titulo informado na lista de empréstimos do usuário.
 
         if(livro == null){
             System.err.println("Livro não encontrado nos empréstimos do usuário!");
@@ -155,8 +161,7 @@ public class LibraryApp {
     }
 
     public static void booksUser(){
-        System.out.print("Nome do usuário: ");
-        User usuario = findUser(read.nextLine()); // Função para buscar usuario, retorna referencia do objeto ou nulo.
+        User usuario = findUser(); // Função para buscar usuario, retorna referencia do objeto ou nulo.
 
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
@@ -169,7 +174,7 @@ public class LibraryApp {
             return;
         }
 
-        System.out.println("Livros emprestados: ");
+        System.out.printf("Livros emprestados para %s (%d):\n", usuario.getNome(), usuario.getId());
         for(Book livro : usuario.getLivrosEmprestados()) System.out.printf("%s - %s (%d)\n", livro.getTitulo(), livro.getAutor(), livro.getAnoPublicacao()); // Para cada livro na lista de empréstimos do usuário, imprimi-lo;
     }
 
@@ -177,8 +182,26 @@ public class LibraryApp {
         return livros.stream().filter(x -> x.getTitulo().toLowerCase().equals(titulo.toLowerCase())).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de livro que tenha o título igual a da busca, se não encontrar retorna nulo. Para isso, transforma-se tanto a string do objeto quanto da procura para lowercased.
     }
 
-    public static User findUser(String nome){
-        return usuarios.stream().filter(x -> x.getNome().toLowerCase().equals(nome.toLowerCase())).findFirst().orElse(null); 
-        // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual da busca, se não encontrar retorna nulo. Para isso, transforma-se tanto a string do objeto quanto da procura para lowercased.
+    public static User findUser(){
+        String choice;
+        while(true){
+            System.out.print("Buscar usuário por ID ou nome? ");
+            choice = read.nextLine().toLowerCase();
+            if(choice.equals("id") || choice.equals("nome")) break;
+            else System.out.println("Opção inválida, tente novamente:");
+        }
+
+        System.out.printf("Usuário (%s): ", choice);
+        if(choice.equals("id")){
+            int id = read.nextInt();
+            read.nextLine();
+            return usuarios.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+             // Retorna uma referência para a primeira ocorrência de usuário que tenha o id igual da busca, se não encontrar retorna nulo.
+        }
+        else{
+            String nome = read.nextLine();
+            return usuarios.stream().filter(x -> x.getNome().toLowerCase().equals(nome.toLowerCase())).findFirst().orElse(null);
+             // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual da busca, se não encontrar retorna nulo. Para isso, transforma-se tanto a string do objeto quanto da procura para lowercased.
+        }
     }
 }
