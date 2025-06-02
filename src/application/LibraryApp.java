@@ -18,7 +18,7 @@ public class LibraryApp {
             if(menu == 8) break;
             switch(menu) {
                 case 1:
-                System.out.println("Cadastrando livro...");
+                    livros.add(newBook());
                     break;
             
                 case 2:
@@ -26,7 +26,7 @@ public class LibraryApp {
                     break;
             
                 case 3:
-                System.out.println("Listando livros...");
+                    listBook(livros);
                     break;
             
                 case 4:
@@ -53,6 +53,7 @@ public class LibraryApp {
     }
 
     public static int menu(){
+        System.err.println();
         System.out.println("=-=-=-=-=-=- Menu -=-=-=-=-=-=-=");
         System.out.println("1- Cadastrar novo livro");
         System.out.println("2- Cadastrar novo usuário");
@@ -64,7 +65,33 @@ public class LibraryApp {
         System.out.println("8- Sair do programa");
         System.out.print("Ação: ");
         int menu = read.nextInt();
+        read.nextLine();
         System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.err.println();
         return menu;
+    }
+
+    public static Book newBook(){
+        System.out.println("CADASTRO DE NOVO LIVRO ");
+        System.out.print("Título: ");
+        String titulo = read.nextLine();
+
+        System.out.print("Autor: ");
+        String autor = read.nextLine();
+
+        System.out.print("Ano de publicação: ");
+        int anoPublicacao = read.nextInt();
+
+        return new Book(titulo, autor, anoPublicacao);
+    }
+
+    public static void listBook(List<Book> livros){
+        for(Book livro : livros){
+            System.out.println(livro.getTitulo());
+            System.out.println("Autor: " + livro.getAutor());
+            System.err.println("Ano de Publicação: " + livro.getAnoPublicacao());
+            System.out.println("Status: " + (livro.isDisponivel() ? "disponível" : "emprestado"));
+            System.err.println();
+        }
     }
 }
