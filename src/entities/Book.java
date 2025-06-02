@@ -1,16 +1,18 @@
 package entities;
 
+import entities.enums.BookStatus;
+
 public class Book {
     private String titulo;
     private String autor;
     private int anoPublicacao;
-    private boolean disponivel;
+    private BookStatus disponivel;
 
     public Book(String titulo, String autor, int anoPublicacao) {
         this.titulo = titulo;
         this.autor = autor;
         this.anoPublicacao = anoPublicacao;
-        this.disponivel = true; // Construtor atribui todo novo livro instanciado como disponível
+        this.disponivel = BookStatus.DISPONIVEL; // Construtor atribui todo novo livro instanciado como disponível
     }
 
     public String getTitulo() {
@@ -37,13 +39,21 @@ public class Book {
         this.anoPublicacao = anoPublicacao;
     }
 
-    public boolean isDisponivel() {
+    public BookStatus getDisponivel() {
         return disponivel;
     }
 
+    public void setDisponivel(BookStatus disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    public boolean isDisponivel() {
+        return (disponivel == BookStatus.DISPONIVEL ? true : false);
+    }
+
     public boolean emprestar(){
-        if(disponivel){ // Se estiver disponível, inverte sua disponibilidade e imprime uma mensagem de empréstimo realizado
-            disponivel = false;
+        if(disponivel == BookStatus.DISPONIVEL){ // Se estiver disponível, inverte sua disponibilidade e imprime uma mensagem de empréstimo realizado
+            disponivel = BookStatus.DISPONIVEL;
             System.out.println("Livro emprestado!");
             return true;
         }
@@ -54,8 +64,8 @@ public class Book {
     }
 
     public boolean devolver(){
-        if(!disponivel){ // Se NÃO estiver disponível, inverte a disponibilidade e imprime uma mensagem de devolução realizada
-            disponivel = true;
+        if(disponivel == BookStatus.EMPRESTADO){ // Se estiver emprestado, inverte a disponibilidade e imprime uma mensagem de devolução realizada
+            disponivel = BookStatus.DISPONIVEL;
             System.out.println("Livro devolvido!");
             return true;
         }
