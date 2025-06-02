@@ -10,7 +10,7 @@ public class User {
 
     public User(String nome, List<User> usuarios) {
         this.nome = nome;
-        this.id = usuarios.size();
+        this.id = usuarios.size()+1;
         this.livrosEmprestados = new ArrayList<>();
     }
 
