@@ -41,7 +41,27 @@ public class Book {
         return disponivel;
     }
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+    public boolean emprestar(){
+        if(disponivel){
+            disponivel = false;
+            System.out.println("Livro emprestado!");
+            return true;
+        }
+        else{
+            System.out.println("Esse livro não está disponível!");
+            return false;
+        }
+    }
+
+    public boolean devolver(){
+        if(!disponivel){
+            disponivel = true;
+            System.out.println("Livro devolvido!");
+            return true;
+        }
+        else{
+            System.out.println("Esse livro já está disponível!");
+            return false;
+        }
     }
 }

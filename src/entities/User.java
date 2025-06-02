@@ -33,4 +33,16 @@ public class User {
     public List<Book> getLivrosEmprestados() {
         return livrosEmprestados;
     }
+
+    public void adicionarLivroEmprestado(Book livro){
+        if(livro.emprestar()){
+            livrosEmprestados.add(livro);
+        }
+    }
+
+    public void removerLivroEmprestado(Book livro){
+        if(livro.devolver()){
+            livrosEmprestados.remove(livro);
+        }
+    }
 }
