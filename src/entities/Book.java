@@ -43,11 +43,9 @@ public class Book {
         return disponivel;
     }
 
-    public void setDisponivel(BookStatus disponivel) {
-        this.disponivel = disponivel;
-    }
+    // Removido o setDisponivel, uma vez que a manipulação será feita através dos métodos emprestar e devolver.
 
-    @Override
+    @Override // Sobreescrita do método toString da biblioteca padrão do java
     public String toString(){
         StringBuilder resposta = new StringBuilder(); // Cria uma nova string com o StringBuilder
 

@@ -26,15 +26,11 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public List<Book> getLivrosEmprestados() {
         return livrosEmprestados;
     }
 
-    // Removido o setter de Livros Emprestados, uma vez que a manipulação da lista será feito pelos métodos de emprestar e devolver do usuário
+    // Removido o setter de Livros Emprestados, uma vez que a manipulação da lista será feito pelos métodos de emprestar e devolver do usuário, além do setId.
 
     public void adicionarLivroEmprestado(Book livro){
         if(livro.emprestar()){ // A função livro.emprestar verifica a disponibilidade, se disponível inverte para emprestado, imprime uma mensagem e retorna true, então o livro é adicionado a lista de empréstimo do usuário
