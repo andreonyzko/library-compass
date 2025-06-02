@@ -18,11 +18,11 @@ public class LibraryApp {
             if(menu == 8) break;
             switch(menu) {
                 case 1:
-                    livros.add(newBook());
+                    newBook(livros);
                     break;
             
                 case 2:
-                System.out.println("Cadastrando usuário...");
+                    newUser(usuarios);
                     break;
             
                 case 3:
@@ -30,7 +30,7 @@ public class LibraryApp {
                     break;
             
                 case 4:
-                System.out.println("Listando usuários...");
+                    listUsers(usuarios);
                     break;
             
                 case 5:
@@ -71,7 +71,7 @@ public class LibraryApp {
         return menu;
     }
 
-    public static Book newBook(){
+    public static void newBook(List<Book> livros){
         System.out.println("CADASTRO DE NOVO LIVRO ");
         System.out.print("Título: ");
         String titulo = read.nextLine();
@@ -82,7 +82,8 @@ public class LibraryApp {
         System.out.print("Ano de publicação: ");
         int anoPublicacao = read.nextInt();
 
-        return new Book(titulo, autor, anoPublicacao);
+        livros.add(new Book(titulo, autor, anoPublicacao));
+        System.out.println("\nLivro cadastrado com sucesso!");
     }
 
     public static void listBook(List<Book> livros){
@@ -92,6 +93,22 @@ public class LibraryApp {
             System.err.println("Ano de Publicação: " + livro.getAnoPublicacao());
             System.out.println("Status: " + (livro.isDisponivel() ? "disponível" : "emprestado"));
             System.err.println();
+        }
+    }
+
+    public static void newUser(List<User> usuarios){
+        System.out.println("CADASTRO DE NOVO USUÁRIO ");
+
+        System.out.print("Nome: ");
+        String nome = read.nextLine();
+
+        usuarios.add(new User(nome, usuarios));
+        System.out.println("\nUsuário cadastrado com sucesso!");
+    }
+
+    public static void listUsers(List<User> usuarios){
+        for(User usuario : usuarios){
+            System.out.printf("#%d - %s\n", usuario.getId(), usuario.getNome());
         }
     }
 }

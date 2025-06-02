@@ -8,9 +8,9 @@ public class User {
     private int id;
     private List<Book> livrosEmprestados;
 
-    public User(String nome, int id) {
+    public User(String nome, List<User> usuarios) {
         this.nome = nome;
-        this.id = id;
+        this.id = usuarios.size();
         this.livrosEmprestados = new ArrayList<>();
     }
 
