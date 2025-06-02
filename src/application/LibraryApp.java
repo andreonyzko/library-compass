@@ -15,6 +15,21 @@ public class LibraryApp {
         while(true){
             int menu = menu(); // Chamada da função que mostra o menu e coleta o número da ação desejada
             if(menu == 8) break; // 8- Sair do programa
+            
+            if(menu == 3 || menu == 5 || menu == 6){
+                if(livros.size() == 0){
+                    System.out.println("Nenhum livro cadastrado no sistema!");
+                    continue;
+                }
+            }
+
+            if(menu == 4 || menu == 5 || menu == 6 || menu == 7){
+                if(usuarios.size() == 0){
+                    System.out.println("Nenhum usuário cadastrado no sistema!");
+                    continue;
+                }
+            }
+
             switch(menu) {
                 case 1: // 1- Cadastrar novo livro
                     newBook();
@@ -66,7 +81,7 @@ public class LibraryApp {
         int menu = read.nextInt();
         read.nextLine();
         System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-        System.err.println();
+        System.out.println();
         return menu;
     }
 
@@ -74,6 +89,11 @@ public class LibraryApp {
         System.out.println("CADASTRO DE NOVO LIVRO ");
         System.out.print("Título: ");
         String titulo = read.nextLine();
+
+        if(livros.stream().filter(x -> x.getTitulo().toLowerCase().equals(titulo.toLowerCase())).findFirst().orElse(null) != null){
+            System.out.println("Esse título já está cadastrado!");
+            return;
+        }
 
         System.out.print("Autor: ");
         String autor = read.nextLine();
@@ -142,21 +162,29 @@ public class LibraryApp {
 
     public static void giveBackBook(){
         System.out.println("REALIZAR DEVOLUÇÃO");
-
-        User usuario = findUser(); // Função para buscar usuario, retorna referencia do objeto ou nulo.
-        if(usuario == null){
-            System.err.println("Usuário não encontrado!");
-            return;
-        }
         
         System.out.print("Título do livro: ");
-        Book livro = usuario.getLivrosEmprestados().stream().filter(x -> x.getTitulo().toLowerCase().equals(read.nextLine())).findFirst().orElse(null); // Busca um objeto livro que possua o titulo informado na lista de empréstimos do usuário.
+        Book livro = findBook(read.nextLine());
 
-        if(livro == null){
-            System.err.println("Livro não encontrado nos empréstimos do usuário!");
+        if(livro == null || livro.isDisponivel()){
+            System.err.println("Livro não encontrado ou não está emprestado!");
             return;
         }
 
+        // Varre cada lista de livros emprestados de cada usuário até encontrar para quem está emprestado o livro
+        User usuario = null;
+        for(User obj_user : usuarios){
+            for(Book obj_book : obj_user.getLivrosEmprestados()){
+                if(obj_book.equals(livro)){
+                    usuario = obj_user;
+                    break;
+                }
+            }
+            if(usuario != null) break;
+        }
+
+        System.out.println("O livro estava emprestado para " + usuario.getNome());
+            
         usuario.removerLivroEmprestado(livro);
     }
 
@@ -174,7 +202,7 @@ public class LibraryApp {
             return;
         }
 
-        System.out.printf("Livros emprestados para %s (%d):\n", usuario.getNome(), usuario.getId());
+        System.out.printf("Livros emprestados para #%d %s:\n", usuario.getId(), usuario.getNome());
         for(Book livro : usuario.getLivrosEmprestados()) System.out.printf("%s - %s (%d)\n", livro.getTitulo(), livro.getAutor(), livro.getAnoPublicacao()); // Para cada livro na lista de empréstimos do usuário, imprimi-lo;
     }
 
