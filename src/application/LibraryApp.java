@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import entities.Book;
 import entities.User;
+import entities.enums.BookStatus;
 
 public class LibraryApp {
     static Scanner read = new Scanner(System.in);
@@ -154,8 +155,13 @@ public class LibraryApp {
         System.out.print("Título do livro: ");
         Book livro = findBook(read.nextLine());
 
-        if(livro == null || livro.isDisponivel()){
-            System.err.println("Livro não encontrado ou não está emprestado!");
+        if(livro == null){
+            System.out.println("Livro não encontrado!");
+            return;
+        }
+
+        if(livro.getDisponivel() == BookStatus.DISPONIVEL){
+            System.out.println("Esse livro não está emprestado!");
             return;
         }
 
@@ -170,10 +176,10 @@ public class LibraryApp {
             }
             if(usuario != null) break;
         }
-
-        System.out.println("O livro estava emprestado para " + usuario.getNome());
             
         usuario.removerLivroEmprestado(livro);
+
+        System.out.printf("%s devolveu o livro '%s'\n", usuario.getNome(), livro.getTitulo());
     }
 
     public static void booksUser(){

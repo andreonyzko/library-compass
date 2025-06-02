@@ -47,10 +47,6 @@ public class Book {
         this.disponivel = disponivel;
     }
 
-    public boolean isDisponivel() {
-        return (disponivel == BookStatus.DISPONIVEL ? true : false);
-    }
-
     @Override
     public String toString(){
         StringBuilder resposta = new StringBuilder(); // Cria uma nova string com o StringBuilder
@@ -83,11 +79,9 @@ public class Book {
     public boolean devolver(){
         if(disponivel == BookStatus.EMPRESTADO){ // Se estiver emprestado, inverte a disponibilidade e imprime uma mensagem de devolução realizada
             disponivel = BookStatus.DISPONIVEL;
-            System.out.println("Livro devolvido!");
             return true;
         }
         else{ // Se já estiver disponível, imprime uma mensagem de que o livro já estava disponível
-            System.out.println("Esse livro já está disponível!");
             return false;
         }
     }
