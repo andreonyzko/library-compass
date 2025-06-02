@@ -121,15 +121,7 @@ public class LibraryApp {
         System.out.print("Nome: ");
         String nome = read.nextLine();
 
-        System.out.print("ID: ");
-        int id = read.nextInt();
-
-        if(usuarios.stream().filter(x -> x.getId() == id).findFirst().orElse(null) != null){
-            System.out.println("Já existe um usuário com esse ID cadastrado");
-            return;
-        }
-
-        usuarios.add(new User(nome, id)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto.
+        usuarios.add(new User(nome, usuarios.size()+1)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto, passando o tamanho da lista para definir os id's de forma incremental.
         System.out.println("\nUsuário cadastrado com sucesso!");
     }
 
@@ -211,25 +203,10 @@ public class LibraryApp {
     }
 
     public static User findUser(){
-        String choice;
-        while(true){
-            System.out.print("Buscar usuário por ID ou nome? ");
-            choice = read.nextLine().toLowerCase();
-            if(choice.equals("id") || choice.equals("nome")) break;
-            else System.out.println("Opção inválida, tente novamente:");
-        }
-
-        System.out.printf("Usuário (%s): ", choice);
-        if(choice.equals("id")){
-            int id = read.nextInt();
-            read.nextLine();
-            return usuarios.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
-             // Retorna uma referência para a primeira ocorrência de usuário que tenha o id igual da busca, se não encontrar retorna nulo.
-        }
-        else{
-            String nome = read.nextLine();
-            return usuarios.stream().filter(x -> x.getNome().toLowerCase().equals(nome.toLowerCase())).findFirst().orElse(null);
-             // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual da busca, se não encontrar retorna nulo. Para isso, transforma-se tanto a string do objeto quanto da procura para lowercased.
-        }
+        System.out.print("Usuário (ID): ");
+        int id = read.nextInt();
+        read.nextLine();
+        return usuarios.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+        // Retorna uma referência para a primeira ocorrência de usuário que tenha o id igual da busca, se não encontrar retorna nulo.
     }
 }
