@@ -10,42 +10,43 @@ import entities.User;
 public class LibraryApp {
     static Scanner read = new Scanner(System.in);
     public static void main(String[] args) {
+        // Criação das listas de livros e usuários cadastrados
         List<Book> livros = new ArrayList<>();
         List<User> usuarios = new ArrayList<>();
 
         while(true){
-            int menu = menu();
-            if(menu == 8) break;
+            int menu = menu(); // Chamada da função que mostra o menu e coleta o número da ação desejada
+            if(menu == 8) break; // 8- Sair do programa
             switch(menu) {
-                case 1:
+                case 1: // 1- Cadastrar novo livro
                     newBook(livros);
                     break;
             
-                case 2:
+                case 2: // 2- Cadastrar novo usuário
                     newUser(usuarios);
                     break;
             
-                case 3:
+                case 3: // 3- Listar todos os livros
                     listBook(livros);
                     break;
             
-                case 4:
+                case 4: // 4- Listar todos os usuários
                     listUsers(usuarios);
                     break;
             
-                case 5:
+                case 5: // 5- Realizar empréstimo
                 System.out.println("Emprestando livro...");
                     break;
             
-                case 6:
+                case 6: // 6- Devolver livro
                 System.out.println("Devolvendo livro...");
                     break;
             
-                case 7:
+                case 7: // 7- Listar livros emprestados por usuário
                 System.out.println("Listando livro por usuário...");
                     break;
             
-                default:
+                default: // Opção inválida
                     System.out.println("Opção inválida! Tente novamente: ");
                     break;
             }
@@ -82,7 +83,7 @@ public class LibraryApp {
         System.out.print("Ano de publicação: ");
         int anoPublicacao = read.nextInt();
 
-        livros.add(new Book(titulo, autor, anoPublicacao));
+        livros.add(new Book(titulo, autor, anoPublicacao)); // Adiciona um novo livro com instância direta do novo objeto passando os parametros necessários
         System.out.println("\nLivro cadastrado com sucesso!");
     }
 
@@ -91,7 +92,7 @@ public class LibraryApp {
             System.out.println(livro.getTitulo());
             System.out.println("Autor: " + livro.getAutor());
             System.err.println("Ano de Publicação: " + livro.getAnoPublicacao());
-            System.out.println("Status: " + (livro.isDisponivel() ? "disponível" : "emprestado"));
+            System.out.println("Status: " + (livro.isDisponivel() ? "disponível" : "emprestado")); // Imprime o estado atual do livro através de uma condição ternária, se o método isDisponivel retornar true imprime "disponível", se false "emprestado".
             System.err.println();
         }
     }
@@ -102,13 +103,15 @@ public class LibraryApp {
         System.out.print("Nome: ");
         String nome = read.nextLine();
 
-        usuarios.add(new User(nome, usuarios));
+        usuarios.add(new User(nome, usuarios)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto, passando a própria lista de usuários para que o construtor pegue seu tamanho da lista e consiga definir o id do novo usuário se forma incremental.
         System.out.println("\nUsuário cadastrado com sucesso!");
     }
 
     public static void listUsers(List<User> usuarios){
-        for(User usuario : usuarios){
+        for(User usuario : usuarios){ // Para cada usuário na lista usuários, imprima:
             System.out.printf("#%d - %s\n", usuario.getId(), usuario.getNome());
         }
     }
+
+
 }

@@ -10,8 +10,8 @@ public class User {
 
     public User(String nome, List<User> usuarios) {
         this.nome = nome;
-        this.id = usuarios.size()+1;
-        this.livrosEmprestados = new ArrayList<>();
+        this.id = usuarios.size()+1; // Coleta o tamanho da lista de usuários cadastrados, incrementa um, para definir ids de usuários de forma incremental.
+        this.livrosEmprestados = new ArrayList<>(); // Instancia uma nova lista de livros vazia, assim o cadastro do usuário inicia com nenhum empréstimo na biblioteca
     }
 
     public String getNome() {
@@ -34,14 +34,16 @@ public class User {
         return livrosEmprestados;
     }
 
+    // Removido o setter de Livros Emprestados, uma vez que a manipulação da lista será feito pelos métodos de emprestar e devolver do usuário
+
     public void adicionarLivroEmprestado(Book livro){
-        if(livro.emprestar()){
+        if(livro.emprestar()){ // A função livro.emprestar verifica a disponibilidade, se disponível inverte para emprestado, imprime uma mensagem e retorna true, então o livro é adicionado a lista de empréstimo do usuário
             livrosEmprestados.add(livro);
         }
     }
 
     public void removerLivroEmprestado(Book livro){
-        if(livro.devolver()){
+        if(livro.devolver()){ // A função livro.devolver verifica disponibilidade, se emprestado inverte para disponível, imprime uma mensagem e retorna true, então o livro é retirado da lista de empréstimos do usuário
             livrosEmprestados.remove(livro);
         }
     }
