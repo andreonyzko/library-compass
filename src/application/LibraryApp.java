@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import entities.Book;
 import entities.User;
@@ -35,7 +36,7 @@ public class LibraryApp {
                     break;
             
                 case 5: // 5- Realizar empréstimo
-                System.out.println("Emprestando livro...");
+                    toLoan(usuarios, livros);
                     break;
             
                 case 6: // 6- Devolver livro
@@ -113,5 +114,27 @@ public class LibraryApp {
         }
     }
 
+    public static void toLoan(List<User> usuarios, List<Book> livros){
+        System.out.println("NOVO EMPRÉSTIMO");
 
+        System.out.print("Título do livro: ");
+        String busca_livro = read.nextLine();
+
+        Book livro = livros.stream().filter(x -> x.getTitulo().equals(busca_livro)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de livro que tenha o título igual inserido acima, se não encontrar retorna nulo
+        if(livro == null){
+            System.err.println("Livro não encontrado!");
+            return;
+        }
+
+        System.out.print("Nome do usuário: ");
+        String busca_usuario = read.nextLine();
+
+        User usuario = usuarios.stream().filter(x -> x.getNome().equals(busca_usuario)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual inserido acima, se não encontrar retorna nulo
+        if(usuario == null){
+            System.err.println("Usuário não encontrado!");
+            return;
+        }
+
+        usuario.adicionarLivroEmprestado(livro); // Realiza o empréstimo
+    }   
 }
