@@ -81,7 +81,7 @@ public class LibraryApp {
         System.out.print("Ano de publicação: ");
         int anoPublicacao = read.nextInt();
 
-        livros.add(new Book(titulo, autor, anoPublicacao)); // Adiciona um novo livro com instância direta do novo objeto passando os parametros necessários
+        livros.add(new Book(titulo, autor, anoPublicacao)); // Adiciona um novo livro com instância direta do novo objeto.
         System.out.println("\nLivro cadastrado com sucesso!");
     }
 
@@ -90,7 +90,7 @@ public class LibraryApp {
             System.out.println(livro.getTitulo());
             System.out.println("Autor: " + livro.getAutor());
             System.err.println("Ano de Publicação: " + livro.getAnoPublicacao());
-            System.out.println("Status: " + (livro.isDisponivel() ? "disponível" : "emprestado")); // Imprime o estado atual do livro através de uma condição ternária, se o método isDisponivel retornar true imprime "disponível", se false "emprestado".
+            System.out.println("Status: " + (livro.isDisponivel() ? "disponível" : "emprestado")); // Imprime o estado atual do livro através de uma condição ternária.
             System.err.println();
         }
     }
@@ -101,7 +101,7 @@ public class LibraryApp {
         System.out.print("Nome: ");
         String nome = read.nextLine();
 
-        usuarios.add(new User(nome, usuarios)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto, passando a própria lista de usuários para que o construtor pegue seu tamanho da lista e consiga definir o id do novo usuário se forma incremental.
+        usuarios.add(new User(nome, usuarios)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto.
         System.out.println("\nUsuário cadastrado com sucesso!");
     }
 
@@ -115,7 +115,7 @@ public class LibraryApp {
         System.out.println("NOVO EMPRÉSTIMO");
 
         System.out.print("Título do livro: ");
-        Book livro = findBook(read.nextLine());
+        Book livro = findBook(read.nextLine()); // Função para buscar livro, retorna referencia do objeto ou nulo.
 
         if(livro == null){
             System.err.println("Livro não encontrado!");
@@ -123,7 +123,7 @@ public class LibraryApp {
         }
 
         System.out.print("Nome do usuário: ");
-        User usuario = findUser(read.nextLine());
+        User usuario = findUser(read.nextLine()); // Função para buscar usuário, retorna referencia do objeto ou nulo.
         
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
@@ -137,14 +137,14 @@ public class LibraryApp {
         System.out.println("REALIZAR DEVOLUÇÃO");
 
         System.out.print("Nome do usuário: ");
-        User usuario = findUser(read.nextLine());
+        User usuario = findUser(read.nextLine()); // Função para buscar usuario, retorna referencia do objeto ou nulo.
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
             return;
         }
         
         System.out.print("Título do livro: ");
-        Book livro = findBook(read.nextLine());
+        Book livro = findBook(read.nextLine()); // Função para buscar livro, retorna referencia do objeto ou nulo.
 
         if(livro == null){
             System.err.println("Livro não encontrado nos empréstimos do usuário!");
@@ -156,7 +156,7 @@ public class LibraryApp {
 
     public static void booksUser(){
         System.out.print("Nome do usuário: ");
-        User usuario = findUser(read.nextLine());
+        User usuario = findUser(read.nextLine()); // Função para buscar usuario, retorna referencia do objeto ou nulo.
 
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
@@ -164,7 +164,7 @@ public class LibraryApp {
         }
 
         System.out.println();
-        if(usuario.getLivrosEmprestados().size() == 0){
+        if(usuario.getLivrosEmprestados().size() == 0){ // Se a quantidade de empréstimo do usuário for zero, imprime:
             System.out.println("Esse usuário não possuí livro emprestado.");
             return;
         }
