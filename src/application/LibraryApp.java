@@ -17,18 +17,14 @@ public class LibraryApp {
             int menu = menu(); // Chamada da função que mostra o menu e coleta o número da ação desejada
             if(menu == 8) break; // 8- Sair do programa
             
-            if(menu == 3 || menu == 5 || menu == 6){
-                if(livros.size() == 0){
-                    System.out.println("Nenhum livro cadastrado no sistema!");
-                    continue;
-                }
+            if((menu == 3 || menu == 5 || menu == 6) && livros.size() == 0){
+                System.out.println("Nenhum livro cadastrado no sistema!");
+                continue;
             }
 
-            if(menu == 4 || menu == 5 || menu == 6 || menu == 7){
-                if(usuarios.size() == 0){
-                    System.out.println("Nenhum usuário cadastrado no sistema!");
-                    continue;
-                }
+            if((menu == 4 || menu == 5 || menu == 6 || menu == 7) && usuarios.size() == 0){
+                System.out.println("Nenhum usuário cadastrado no sistema!");
+                continue;
             }
 
             switch(menu) {
@@ -91,6 +87,7 @@ public class LibraryApp {
         System.out.print("Título: ");
         String titulo = read.nextLine();
 
+        // Tenta encontrar um livro já cadastrado com este título, o ideal é retornar nulo, ou seja, não ter
         if(livros.stream().filter(x -> x.getTitulo().toLowerCase().equals(titulo.toLowerCase())).findFirst().orElse(null) != null){
             System.out.println("Esse título já está cadastrado!");
             return;
@@ -196,7 +193,12 @@ public class LibraryApp {
             return;
         }
 
-        System.out.printf("%s:\n", usuario.toString());
+        System.out.printf("%s (%d EMPRÉSTIMO%s):\n", 
+        usuario.toString().replace(" - ", " ").toUpperCase(), 
+        usuario.getLivrosEmprestados().size(),
+        usuario.getLivrosEmprestados().size() > 1 ? "S" : ""
+        );
+
         for(Book livro : usuario.getLivrosEmprestados()) System.out.println(livro.toStringOneLine()); // Para cada livro na lista de empréstimos do usuário, imprimi-lo;
     }
 
