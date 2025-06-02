@@ -3,48 +3,45 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import entities.Book;
 import entities.User;
 
 public class LibraryApp {
     static Scanner read = new Scanner(System.in);
+    static List<Book> livros = new ArrayList<>();
+    static List<User> usuarios = new ArrayList<>();
     public static void main(String[] args) {
-        // Criação das listas de livros e usuários cadastrados
-        List<Book> livros = new ArrayList<>();
-        List<User> usuarios = new ArrayList<>();
-
         while(true){
             int menu = menu(); // Chamada da função que mostra o menu e coleta o número da ação desejada
             if(menu == 8) break; // 8- Sair do programa
             switch(menu) {
                 case 1: // 1- Cadastrar novo livro
-                    newBook(livros);
+                    newBook();
                     break;
             
                 case 2: // 2- Cadastrar novo usuário
-                    newUser(usuarios);
+                    newUser();
                     break;
             
                 case 3: // 3- Listar todos os livros
-                    listBook(livros);
+                    listBook();
                     break;
             
                 case 4: // 4- Listar todos os usuários
-                    listUsers(usuarios);
+                    listUsers();
                     break;
             
                 case 5: // 5- Realizar empréstimo
-                    toLoan(usuarios, livros);
+                    toLoan();
                     break;
             
                 case 6: // 6- Devolver livro
-                System.out.println("Devolvendo livro...");
+                    giveBackBook();
                     break;
             
                 case 7: // 7- Listar livros emprestados por usuário
-                    booksUser(usuarios);
+                    booksUser();
                     break;
             
                 default: // Opção inválida
@@ -73,7 +70,7 @@ public class LibraryApp {
         return menu;
     }
 
-    public static void newBook(List<Book> livros){
+    public static void newBook(){
         System.out.println("CADASTRO DE NOVO LIVRO ");
         System.out.print("Título: ");
         String titulo = read.nextLine();
@@ -88,7 +85,7 @@ public class LibraryApp {
         System.out.println("\nLivro cadastrado com sucesso!");
     }
 
-    public static void listBook(List<Book> livros){
+    public static void listBook(){
         for(Book livro : livros){
             System.out.println(livro.getTitulo());
             System.out.println("Autor: " + livro.getAutor());
@@ -98,7 +95,7 @@ public class LibraryApp {
         }
     }
 
-    public static void newUser(List<User> usuarios){
+    public static void newUser(){
         System.out.println("CADASTRO DE NOVO USUÁRIO ");
 
         System.out.print("Nome: ");
@@ -108,48 +105,80 @@ public class LibraryApp {
         System.out.println("\nUsuário cadastrado com sucesso!");
     }
 
-    public static void listUsers(List<User> usuarios){
+    public static void listUsers(){
         for(User usuario : usuarios){ // Para cada usuário na lista usuários, imprima:
             System.out.printf("#%d - %s\n", usuario.getId(), usuario.getNome());
         }
     }
 
-    public static void toLoan(List<User> usuarios, List<Book> livros){
+    public static void toLoan(){
         System.out.println("NOVO EMPRÉSTIMO");
 
         System.out.print("Título do livro: ");
-        String busca_livro = read.nextLine();
+        Book livro = findBook(read.nextLine());
 
-        Book livro = livros.stream().filter(x -> x.getTitulo().equals(busca_livro)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de livro que tenha o título igual inserido acima, se não encontrar retorna nulo
         if(livro == null){
             System.err.println("Livro não encontrado!");
             return;
         }
 
         System.out.print("Nome do usuário: ");
-        String busca_usuario = read.nextLine();
-
-        User usuario = usuarios.stream().filter(x -> x.getNome().equals(busca_usuario)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual inserido acima, se não encontrar retorna nulo
+        User usuario = findUser(read.nextLine());
+        
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
             return;
         }
 
         usuario.adicionarLivroEmprestado(livro); // Realiza o empréstimo
-    }   
+    }
 
-    public static void booksUser(List<User> usuarios){
+    public static void giveBackBook(){
+        System.out.println("REALIZAR DEVOLUÇÃO");
+
         System.out.print("Nome do usuário: ");
-        String busca_usuario = read.nextLine();
+        User usuario = findUser(read.nextLine());
+        if(usuario == null){
+            System.err.println("Usuário não encontrado!");
+            return;
+        }
+        
+        System.out.print("Título do livro: ");
+        Book livro = findBook(read.nextLine());
 
-        User usuario = usuarios.stream().filter(x -> x.getNome().equals(busca_usuario)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual inserido acima, se não encontrar retorna nulo
+        if(livro == null){
+            System.err.println("Livro não encontrado nos empréstimos do usuário!");
+            return;
+        }
+
+        usuario.removerLivroEmprestado(livro);
+    }
+
+    public static void booksUser(){
+        System.out.print("Nome do usuário: ");
+        User usuario = findUser(read.nextLine());
+
         if(usuario == null){
             System.err.println("Usuário não encontrado!");
             return;
         }
 
         System.out.println();
+        if(usuario.getLivrosEmprestados().size() == 0){
+            System.out.println("Esse usuário não possuí livro emprestado.");
+            return;
+        }
+
         System.out.println("Livros emprestados: ");
-        for(Book livro : usuario.getLivrosEmprestados()) System.out.printf("%s - %s (%d)\n", livro.getTitulo(), livro.getAutor(), livro.getAnoPublicacao());
+        for(Book livro : usuario.getLivrosEmprestados()) System.out.printf("%s - %s (%d)\n", livro.getTitulo(), livro.getAutor(), livro.getAnoPublicacao()); // Para cada livro na lista de empréstimos do usuário, imprimi-lo;
+    }
+
+    public static Book findBook(String titulo){
+        return livros.stream().filter(x -> x.getTitulo().toLowerCase().equals(titulo.toLowerCase())).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de livro que tenha o título igual a da busca, se não encontrar retorna nulo. Para isso, transforma-se tanto a string do objeto quanto da procura para lowercased.
+    }
+
+    public static User findUser(String nome){
+        return usuarios.stream().filter(x -> x.getNome().toLowerCase().equals(nome.toLowerCase())).findFirst().orElse(null); 
+        // Retorna uma referência para a primeira ocorrência de usuário que tenha o nome igual da busca, se não encontrar retorna nulo. Para isso, transforma-se tanto a string do objeto quanto da procura para lowercased.
     }
 }
