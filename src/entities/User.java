@@ -33,15 +33,11 @@ public class User {
     // Removido o setter de Livros Emprestados, uma vez que a manipulação da lista será feito pelos métodos de emprestar e devolver do usuário, além do setId.
 
     public void addBorrowedBook(Book book){
-        if(book.lend()){ // A função livro.emprestar verifica a disponibilidade, se disponível inverte para emprestado, imprime uma mensagem e retorna true, então o livro é adicionado a lista de empréstimo do usuário
-            borrowedBooks.add(book);
-        }
+        if(book.lend()) borrowedBooks.add(book); // A função livro.emprestar verifica a disponibilidade, se disponível inverte para emprestado, imprime uma mensagem e retorna true, então o livro é adicionado a lista de empréstimo do usuário
     }
 
     public void remBorrowedBook(Book book){
-        if(book.giveBack()){ // A função livro.devolver verifica disponibilidade, se emprestado inverte para disponível, imprime uma mensagem e retorna true, então o livro é retirado da lista de empréstimos do usuário
-            borrowedBooks.remove(book);
-        }
+        if(book.giveBack()) borrowedBooks.remove(book); // A função livro.devolver verifica disponibilidade, se emprestado inverte para disponível, imprime uma mensagem e retorna true, então o livro é retirado da lista de empréstimos do usuário
     }
 
     @Override

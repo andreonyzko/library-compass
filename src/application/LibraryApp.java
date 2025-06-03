@@ -91,7 +91,7 @@ public class LibraryApp {
         String title = read.nextLine().trim();
 
         // Tenta encontrar um livro já cadastrado com este título, o ideal é retornar nulo, ou seja, não ter
-        if(books.stream().filter(x -> x.getTitle().equalsIgnoreCase(title)).findFirst().orElse(null) != null){
+        if(findBook(title) != null){
             System.out.println("Esse título já está cadastrado!");
             return;
         }
@@ -127,8 +127,7 @@ public class LibraryApp {
     public static void toLoan(){
         System.out.println("NOVO EMPRÉSTIMO");
 
-        System.out.print("Título do livro: ");
-        Book book = findBook(read.nextLine().trim()); // Função para buscar livro, retorna referencia do objeto ou nulo.
+        Book book = findBook(); // Função para buscar livro, retorna referencia do objeto ou nulo.
 
         if(book == null){
             System.out.println("Livro não encontrado!");
@@ -148,8 +147,7 @@ public class LibraryApp {
     public static void giveBackBook(){
         System.out.println("REALIZAR DEVOLUÇÃO");
         
-        System.out.print("Título do livro: ");
-        Book book = findBook(read.nextLine().trim());
+        Book book = findBook();
 
         if(book == null){
             System.out.println("Livro não encontrado!");
@@ -199,6 +197,12 @@ public class LibraryApp {
         );
 
         for(Book book : user.getBorrowedBooks()) System.out.println(book.toStringOneLine()); // Para cada livro na lista de empréstimos do usuário, imprimi-lo;
+    }
+
+    public static Book findBook(){
+        System.out.print("Título do livro: ");
+        String title = read.nextLine().trim();
+        return books.stream().filter(x -> x.getTitle().equalsIgnoreCase(title)).findFirst().orElse(null); // Retorna uma referência para a primeira ocorrência de livro que tenha o título igual a da busca, se não encontrar retorna nulo. Para isso, ignora-se as diferenças de minúscula e maísculas.
     }
 
     public static Book findBook(String title){
