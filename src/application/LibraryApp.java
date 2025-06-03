@@ -75,10 +75,13 @@ public class LibraryApp {
         System.out.println("7- Listar livros emprestados por usuário");
         System.out.println("8- Sair do programa");
         System.out.print("Ação: ");
+
         int menu = read.nextInt();
-        read.nextLine();
+        read.nextLine(); // Limpa o buffer
+
         System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         System.out.println();
+
         return menu;
     }
 
@@ -114,15 +117,11 @@ public class LibraryApp {
     }
 
     public static void listBook(){
-        for(Book book : books){
-            System.out.println(book.toString());
-        }
+        for(Book book : books) System.out.println(book.toString()); // Para cada livro na lista livros, imprima
     }
 
     public static void listUsers(){
-        for(User user : users){ // Para cada usuário na lista usuários, imprima:
-            System.out.println(user.toString());
-        }
+        for(User user : users) System.out.println(user.toString()); // Para cada usuário na lista usuários, imprima
     }
 
     public static void toLoan(){
