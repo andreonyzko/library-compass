@@ -103,12 +103,6 @@ public class LibraryApp {
         System.out.println("\nLivro cadastrado com sucesso!");
     }
 
-    public static void listBook(){
-        for(Book book : books){
-            System.out.println(book.toString());
-        }
-    }
-
     public static void newUser(){
         System.out.println("CADASTRO DE NOVO USUÁRIO ");
 
@@ -117,6 +111,12 @@ public class LibraryApp {
 
         users.add(new User(name, users.size()+1)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto, passando o tamanho da lista para definir os id's de forma incremental.
         System.out.println("\nUsuário cadastrado com sucesso!");
+    }
+
+    public static void listBook(){
+        for(Book book : books){
+            System.out.println(book.toString());
+        }
     }
 
     public static void listUsers(){
@@ -143,7 +143,7 @@ public class LibraryApp {
             return;
         }
 
-        user.adicionarLivroEmprestado(book); // Realiza o empréstimo
+        user.addBorrowedBook(book); // Realiza o empréstimo
     }
 
     public static void giveBackBook(){
@@ -174,7 +174,7 @@ public class LibraryApp {
             if(user != null) break;
         }
             
-        user.removerLivroEmprestado(book);
+        user.remBorrowedBook(book);
 
         System.out.printf("%s devolveu o livro '%s'\n", user.getName(), book.getTitle());
     }
