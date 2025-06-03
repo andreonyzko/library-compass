@@ -64,7 +64,7 @@ public class LibraryApp {
     }
 
     public static int menu(){
-        System.err.println();
+        System.out.println();
         System.out.println("=-=-=-=-=-=- Menu -=-=-=-=-=-=-=");
         System.out.println("1- Cadastrar novo livro");
         System.out.println("2- Cadastrar novo usuário");
@@ -132,14 +132,14 @@ public class LibraryApp {
         Book book = findBook(read.nextLine().trim()); // Função para buscar livro, retorna referencia do objeto ou nulo.
 
         if(book == null){
-            System.err.println("Livro não encontrado!");
+            System.out.println("Livro não encontrado!");
             return;
         }
 
         User user = findUser(); // Função para buscar usuário, retorna referencia do objeto ou nulo.
         
         if(user == null){
-            System.err.println("Usuário não encontrado!");
+            System.out.println("Usuário não encontrado!");
             return;
         }
 
@@ -183,7 +183,7 @@ public class LibraryApp {
         User user = findUser(); // Função para buscar usuario, retorna referencia do objeto ou nulo.
 
         if(user == null){
-            System.err.println("Usuário não encontrado!");
+            System.out.println("Usuário não encontrado!");
             return;
         }
 
