@@ -85,7 +85,7 @@ public class LibraryApp {
     public static void newBook(){
         System.out.println("CADASTRO DE NOVO LIVRO ");
         System.out.print("Título: ");
-        String title = read.nextLine();
+        String title = read.nextLine().trim();
 
         // Tenta encontrar um livro já cadastrado com este título, o ideal é retornar nulo, ou seja, não ter
         if(books.stream().filter(x -> x.getTitle().equalsIgnoreCase(title)).findFirst().orElse(null) != null){
@@ -94,7 +94,7 @@ public class LibraryApp {
         }
 
         System.out.print("Autor: ");
-        String author = read.nextLine();
+        String author = read.nextLine().trim();
 
         System.out.print("Ano de publicação: ");
         int yearPublication = read.nextInt();
@@ -113,7 +113,7 @@ public class LibraryApp {
         System.out.println("CADASTRO DE NOVO USUÁRIO ");
 
         System.out.print("Nome: ");
-        String name = read.nextLine();
+        String name = read.nextLine().trim();
 
         users.add(new User(name, users.size()+1)); // Adiciona um novo usuário a lista de usuários com uma instânciação direta do objeto, passando o tamanho da lista para definir os id's de forma incremental.
         System.out.println("\nUsuário cadastrado com sucesso!");
@@ -129,7 +129,7 @@ public class LibraryApp {
         System.out.println("NOVO EMPRÉSTIMO");
 
         System.out.print("Título do livro: ");
-        Book book = findBook(read.nextLine()); // Função para buscar livro, retorna referencia do objeto ou nulo.
+        Book book = findBook(read.nextLine().trim()); // Função para buscar livro, retorna referencia do objeto ou nulo.
 
         if(book == null){
             System.err.println("Livro não encontrado!");
@@ -150,7 +150,7 @@ public class LibraryApp {
         System.out.println("REALIZAR DEVOLUÇÃO");
         
         System.out.print("Título do livro: ");
-        Book book = findBook(read.nextLine());
+        Book book = findBook(read.nextLine().trim());
 
         if(book == null){
             System.out.println("Livro não encontrado!");
