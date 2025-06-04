@@ -90,6 +90,11 @@ public class LibraryApp {
         System.out.print("Título: ");
         String title = read.nextLine().trim();
 
+        // Verifica se o nome é válido
+        if(title.length() == 0){
+            System.out.println("Título inválido! Operação cancelada.");
+        }
+
         // Tenta encontrar um livro já cadastrado com este título, o ideal é retornar nulo, ou seja, não ter
         if(findBook(title) != null){
             System.out.println("Esse título já está cadastrado!");
