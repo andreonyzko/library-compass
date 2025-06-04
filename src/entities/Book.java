@@ -65,11 +65,11 @@ public class Book {
     public boolean lend(){
         if(available == BookStatus.DISPONIVEL){ // Se estiver disponível, inverte sua disponibilidade e imprime uma mensagem de empréstimo realizado
             available = BookStatus.EMPRESTADO;
-            System.out.println("Livro emprestado!");
+            System.out.println("Livro emprestado!\n");
             return true;
         }
         else{ // Se não estiver disponível imprime uma mensagem de indisponiblidade
-            System.out.println("Esse livro não está disponível!");
+            System.out.println("Esse livro não está disponível!\n");
             return false;
         }
     }
