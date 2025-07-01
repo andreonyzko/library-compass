@@ -2,10 +2,8 @@ package com.andre.librarycompass.rest;
 
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.service.BookService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +13,7 @@ public class BookRestController {
 
     private BookService bookService;
 
+    @Autowired
     public BookRestController(BookService bookService){
         this.bookService = bookService;
     }
@@ -25,7 +24,8 @@ public class BookRestController {
     }
 
     @GetMapping("/{bookId}")
-    public Book getBook(@PathVariable Integer bookId){
+    public Book getBook(@PathVariable Long bookId){
         return bookService.findById(bookId);
     }
+
 }

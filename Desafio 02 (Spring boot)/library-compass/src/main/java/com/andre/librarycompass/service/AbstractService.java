@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public abstract class AbstractService<T>{
 
-    private JpaRepository<T, Integer> repository;
+    private JpaRepository<T, Long> repository;
 
-    public AbstractService(JpaRepository<T, Integer> repository){
+    public AbstractService(JpaRepository<T, Long> repository){
         this.repository = repository;
     }
 
@@ -17,7 +17,7 @@ public abstract class AbstractService<T>{
         return repository.findAll();
     }
 
-    public T findById(Integer id){
+    public T findById(Long id){
         Optional<T> obj = repository.findById(id);
 
         if(obj.isEmpty()) throw new RuntimeException("Objeto não encontrado");
@@ -25,8 +25,8 @@ public abstract class AbstractService<T>{
         return obj.get();
     }
 
-    public void save(T obj){
-        repository.save(obj);
+    public T save(T obj){
+        return repository.save(obj);
     }
 
     public void update(T obj){
