@@ -53,7 +53,7 @@ public class BookRestController {
     @DeleteMapping("/{bookId}")
     public String deleteBook(@PathVariable Long bookId){
         bookService.deleteById(bookId);
-        return "Book deleted: " + bookId;
+        return "Livro " + bookId + " deletado.";
     }
 
     @PostMapping("{bookId}/emprestar/{userId}")
@@ -70,5 +70,18 @@ public class BookRestController {
 
         return loanService.save(loan);
     }
-    
+
+    @PostMapping("/{bookId}/devolver")
+    public Book giveBackBook(@PathVariable Long bookId){
+        Book book = bookService.findById(bookId);
+        Loan loan = book.getLoan();
+
+        book.setLoan(null);
+        book.setAvailable(BookStatus.DISPONIVEL);
+
+        bookService.save(book);
+        loanService.delete(loan);
+
+        return book;
+    }
 }
