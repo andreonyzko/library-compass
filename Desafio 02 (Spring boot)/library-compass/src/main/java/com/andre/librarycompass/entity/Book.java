@@ -1,6 +1,7 @@
 package com.andre.librarycompass.entity;
 
 import com.andre.librarycompass.entity.enums.BookStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Book {
     @Column(name = "status")
     private BookStatus available;
 
-    @OneToOne(mappedBy = "book", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    @OneToOne(mappedBy = "book")
     private Loan loan;
 }

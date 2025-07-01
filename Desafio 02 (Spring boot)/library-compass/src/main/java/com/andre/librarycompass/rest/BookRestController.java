@@ -2,7 +2,11 @@ package com.andre.librarycompass.rest;
 
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.entity.Loan;
+import com.andre.librarycompass.entity.User;
+import com.andre.librarycompass.entity.enums.BookStatus;
 import com.andre.librarycompass.service.BookService;
+import com.andre.librarycompass.service.LoanService;
+import com.andre.librarycompass.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +16,15 @@ import java.util.List;
 @RequestMapping("/api/livros")
 public class BookRestController {
 
+    private final UserService userService;
+    private final LoanService loanService;
     private BookService bookService;
 
     @Autowired
-    public BookRestController(BookService bookService){
+    public BookRestController(BookService bookService, UserService userService, LoanService loanService){
         this.bookService = bookService;
+        this.userService = userService;
+        this.loanService = loanService;
     }
 
     @GetMapping
@@ -32,6 +40,7 @@ public class BookRestController {
     @PostMapping
     public Book registerBook(@RequestBody Book book){
         book.setId(null);
+        book.setAvailable(BookStatus.DISPONIVEL);
         return bookService.save(book);
     }
 
@@ -47,4 +56,19 @@ public class BookRestController {
         return "Book deleted: " + bookId;
     }
 
+    @PostMapping("{bookId}/emprestar/{userId}")
+    public Loan loanBook(@PathVariable Long bookId, @PathVariable Long userId){
+        Loan loan = new Loan();
+
+        Book book = bookService.findById(bookId);
+        book.setAvailable(BookStatus.EMPRESTADO);
+
+        User user = userService.findById(userId);
+
+        loan.setBook(book);
+        loan.setUser(user);
+
+        return loanService.save(loan);
+    }
+    
 }
