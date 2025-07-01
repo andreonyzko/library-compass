@@ -29,11 +29,11 @@ public abstract class AbstractService<T>{
         return repository.save(obj);
     }
 
-    public void update(T obj){
-        repository.save(obj);
+    public T update(T obj){
+        return repository.save(obj);
     }
 
-    public void delete(T obj){
-        repository.delete(obj);
+    public void deleteById(Long id){
+        repository.delete(findById(id));
     }
 }

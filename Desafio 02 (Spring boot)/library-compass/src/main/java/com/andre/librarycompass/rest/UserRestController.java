@@ -2,10 +2,7 @@ package com.andre.librarycompass.rest;
 
 import com.andre.librarycompass.entity.User;
 import com.andre.librarycompass.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,23 @@ public class UserRestController {
     @GetMapping("/{userId}")
     public User getUser(@PathVariable Long userId){
         return userService.findById(userId);
+    }
+
+    @PostMapping
+    public User registerUser(@RequestBody User user){
+        user.setId(null);
+        return userService.save(user);
+    }
+
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody User user){
+        user.setId(userId);
+        return userService.update(user);
+    }
+
+    @DeleteMapping("/{userId}")
+    public String deleteUser(@PathVariable Long userId){
+        userService.deleteById(userId);
+        return "User deleted: " + userId;
     }
 }
