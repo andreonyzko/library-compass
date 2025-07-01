@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/livros")
+@RequestMapping("/api/livros")
 public class BookRestController {
 
     private BookService bookService;
