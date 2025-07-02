@@ -17,6 +17,7 @@ public abstract class AbstractService<T>{
         return repository.findAll();
     }
 
+    // May not found object
     public T findById(Long id){
         Optional<T> obj = repository.findById(id);
 
@@ -25,6 +26,7 @@ public abstract class AbstractService<T>{
         return obj.get();
     }
 
+    // Must check if client has fill the required fields and set id as null
     public T save(T obj){
         return repository.save(obj);
     }
@@ -33,9 +35,11 @@ public abstract class AbstractService<T>{
         return repository.save(obj);
     }
 
-    public void delete(T obj){ repository.delete(obj); }
+    public void delete(T obj){
+        repository.delete(obj);
+    }
 
     public void deleteById(Long id){
-        repository.delete(findById(id));
+        delete(findById(id));
     }
 }

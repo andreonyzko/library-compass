@@ -1,15 +1,14 @@
 package com.andre.librarycompass.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data // Generate getters, setters, hashcode and equals
+@NoArgsConstructor // Generate constructor without params
+@AllArgsConstructor // Generate constructor with all fields as params
 
 @Entity
 @Table(name = "loan")
@@ -24,7 +23,7 @@ public class Loan {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @ManyToOne
+    @ManyToOne // Many loans from one user
     @JoinColumn(name = "user_id")
     private User user;
 }

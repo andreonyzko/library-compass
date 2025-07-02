@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data // Generate getters, setters, hashcode and equals
+@NoArgsConstructor // Generate constructor without params
+@AllArgsConstructor // Generate constructor with all fields as params
 
 @Entity
 @Table(name = "book")
@@ -31,7 +31,7 @@ public class Book {
     @Column(name = "status")
     private BookStatus available;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "book")
+    @JsonIgnore // Ignore field when object is parsed to json
+    @OneToOne(mappedBy = "book") // A book on loan
     private Loan loan;
 }

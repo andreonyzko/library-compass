@@ -1,6 +1,5 @@
 package com.andre.librarycompass.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,9 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data // Generate getters, setters, hashcode and equals
+@NoArgsConstructor // Generate constructor without params
+@AllArgsConstructor // Generate constructor with all fields as params
 
 @Entity
 @Table(name = "user")
@@ -24,7 +23,7 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @JsonIgnore  // Ignore field when object is parsed to json
+    @OneToMany(mappedBy = "user") // A user has many loans
     private List<Loan> loans;
 }
