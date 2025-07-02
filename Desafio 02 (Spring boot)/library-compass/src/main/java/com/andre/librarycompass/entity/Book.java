@@ -29,7 +29,7 @@ public class Book {
     private Integer yearPublication;
 
     @Column(name = "status")
-    private BookStatus available;
+    private BookStatus status;
 
     @JsonIgnore // Ignore field when object is parsed to json
     @OneToOne(mappedBy = "book") // A book on loan
