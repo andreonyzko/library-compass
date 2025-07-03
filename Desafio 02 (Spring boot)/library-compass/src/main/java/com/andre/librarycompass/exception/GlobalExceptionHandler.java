@@ -52,4 +52,18 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(response, status);
     }
+
+    @ExceptionHandler(DeletionNotAllowedException.class)
+    public ResponseEntity<ErrorResponse> deletionNotAllowedException(DeletionNotAllowedException exception, HttpServletRequest request){
+        HttpStatus status = HttpStatus.CONFLICT;
+        ErrorResponse response = new ErrorResponse(
+                LocalDateTime.now(),
+                status.value(),
+                "Exclusão não permitida",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return new ResponseEntity<>(response, status);
+    }
 }

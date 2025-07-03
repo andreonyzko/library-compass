@@ -34,13 +34,13 @@ public class UserRestController {
     // POST /api/usuarios: Register new user.
     @PostMapping
     public User registerUser(@RequestBody User user){
-        return userService.registerUser(user);
+        return userService.save(user, null);
     }
 
     // PUT /api/usuarios/{id}: Update existing user.
     @PutMapping("/{userId}")
     public User updateUser(@RequestBody User user, @PathVariable Long userId){
-        return userService.updateUser(user, userId);
+        return userService.save(user, userId);
     }
 
     // DELETE /api/usuarios/{id}: Delete user by id.

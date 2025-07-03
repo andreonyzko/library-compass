@@ -36,13 +36,13 @@ public class BookRestController {
     // POST /api/livros: Register new book.
     @PostMapping
     public Book registerBook(@RequestBody Book book){
-        return bookService.registerNewBook(book);
+        return bookService.save(book, null);
     }
 
     // PUT /api/livros/{id}: Update an existing book.
     @PutMapping("/{bookId}")
     public Book updateBook(@PathVariable Long bookId, @RequestBody Book book){
-        return bookService.update(book, bookId);
+        return bookService.save(book, bookId);
     }
 
     // DELETE /api/livros/{id}: Delete book by id.

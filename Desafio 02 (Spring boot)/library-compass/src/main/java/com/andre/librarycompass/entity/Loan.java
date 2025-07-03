@@ -23,7 +23,7 @@ public class Loan {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @ManyToOne // Many loans from one user
+    @ManyToOne(cascade = CascadeType.MERGE) // Many loans from one user
     @JoinColumn(name = "user_id")
     private User user;
 }
