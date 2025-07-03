@@ -11,4 +11,9 @@ public class LoanService extends AbstractService<Loan>{
     public LoanService(LoanRepository loanRepository){
         super(loanRepository);
     }
+
+    @Override
+    public String getEntityName() {
+        return "Empréstimo";
+    }
 }

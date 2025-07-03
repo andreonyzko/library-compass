@@ -1,13 +1,13 @@
 package com.andre.librarycompass.service;
 
+import com.andre.librarycompass.exception.NotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public abstract class AbstractService<T>{
 
-    private JpaRepository<T, Long> repository;
+    private final JpaRepository<T, Long> repository;
 
     public AbstractService(JpaRepository<T, Long> repository){
         this.repository = repository;
@@ -19,11 +19,8 @@ public abstract class AbstractService<T>{
 
     // May not found object
     public T findById(Long id){
-        Optional<T> obj = repository.findById(id);
-
-        if(obj.isEmpty()) throw new RuntimeException("Objeto não encontrado");
-
-        return obj.get();
+        return repository.findById(id)
+                .orElseThrow( () -> new NotFoundException(getEntityName() + " não encontrado") );
     }
 
     // Must check if client has fill the required fields and set id as null
@@ -38,4 +35,6 @@ public abstract class AbstractService<T>{
     public void deleteById(Long id){
         delete(findById(id));
     }
+
+    public abstract String getEntityName();
 }
