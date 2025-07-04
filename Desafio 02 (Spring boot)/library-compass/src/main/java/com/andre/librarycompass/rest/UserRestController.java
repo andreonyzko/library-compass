@@ -1,8 +1,10 @@
 package com.andre.librarycompass.rest;
 
-import com.andre.librarycompass.entity.Book;
-import com.andre.librarycompass.entity.User;
+import com.andre.librarycompass.dto.BookResponseDTO;
+import com.andre.librarycompass.dto.UserDTO;
+import com.andre.librarycompass.dto.UserResponseDTO;
 import com.andre.librarycompass.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,26 +23,26 @@ public class UserRestController {
 
     // GET /api/usuarios: List all users.
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<UserResponseDTO> getAllUsers(){
         return userService.findAll();
     }
 
     // GET /api/usuarios/{id}: Search user by id.
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable Long userId){
+    public UserResponseDTO getUser(@PathVariable Long userId){
         return userService.findById(userId);
     }
 
     // POST /api/usuarios: Register new user.
     @PostMapping
-    public User registerUser(@RequestBody User user){
-        return userService.save(user, null);
+    public UserResponseDTO registerUser(@Valid @RequestBody UserDTO userDTO){
+        return userService.save(userDTO, null);
     }
 
     // PUT /api/usuarios/{id}: Update existing user.
     @PutMapping("/{userId}")
-    public User updateUser(@RequestBody User user, @PathVariable Long userId){
-        return userService.save(user, userId);
+    public UserResponseDTO updateUser(@Valid @RequestBody UserDTO userDTO, @PathVariable Long userId){
+        return userService.save(userDTO, userId);
     }
 
     // DELETE /api/usuarios/{id}: Delete user by id.
@@ -52,7 +54,7 @@ public class UserRestController {
 
     // GET /api/usuarios/{usuarioId}/livros-emprestados: List all borrowed books by the user.
     @GetMapping("/{userId}/livros-emprestados")
-    public List<Book> getUserBorrowedBooks(@PathVariable Long userId){
+    public List<BookResponseDTO> getUserBorrowedBooks(@PathVariable Long userId){
         return userService.getUserBorrowedBooks(userId);
     }
 }

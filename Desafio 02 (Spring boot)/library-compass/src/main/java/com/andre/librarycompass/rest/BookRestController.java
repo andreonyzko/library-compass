@@ -1,8 +1,11 @@
 package com.andre.librarycompass.rest;
 
+import com.andre.librarycompass.dto.BookDTO;
+import com.andre.librarycompass.dto.BookResponseDTO;
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.entity.Loan;
 import com.andre.librarycompass.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,27 +26,32 @@ public class BookRestController {
 
     // GET /api/livros: List all books.
     @GetMapping
-    public List<Book> getAllBooks(){
+    public List<BookResponseDTO> getAllBooks(){
         return bookService.findAll();
     }
 
     // GET /api/livros/{id}: Search book by id.
     @GetMapping("/{bookId}")
-    public Book getBook(@PathVariable Long bookId){
+    public BookResponseDTO getBook(@PathVariable Long bookId){
         return bookService.findById(bookId);
     }
 
     // POST /api/livros: Register new book.
     @PostMapping
-    public Book registerBook(@RequestBody Book book){
-        return bookService.save(book, null);
+    public BookResponseDTO registerBook(@Valid @RequestBody BookDTO bookDTO){
+        return bookService.save(bookDTO, null);
     }
 
     // PUT /api/livros/{id}: Update an existing book.
     @PutMapping("/{bookId}")
-    public Book updateBook(@PathVariable Long bookId, @RequestBody Book book){
-        return bookService.save(book, bookId);
+    public BookResponseDTO updateBook(@PathVariable Long bookId, @Valid @RequestBody BookDTO bookDTO){
+        return bookService.save(bookDTO, bookId);
     }
+
+//    @PatchMapping("/{bookId}")
+//    public BookResponseDTO partialUpdateBook(@PathVariable Long bookId, @RequestBody BookDTO bookDTO){
+//        return bookService.partialUpdate(bookId, bookDTO);
+//    }
 
     // DELETE /api/livros/{id}: Delete book by id.
     @DeleteMapping("/{bookId}")

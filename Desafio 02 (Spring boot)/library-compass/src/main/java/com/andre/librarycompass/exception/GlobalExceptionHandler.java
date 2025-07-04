@@ -3,6 +3,8 @@ package com.andre.librarycompass.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,27 +14,35 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorResponse> notFoundException(NotFoundException exception, HttpServletRequest request){
+    public ResponseEntity<ErrorResponse> notFoundException(NotFoundException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
         ErrorResponse response = new ErrorResponse(
                 LocalDateTime.now(),
                 status.value(),
                 "Não encontrado",
-                exception.getMessage(),
+                e.getMessage(),
                 request.getRequestURI()
         );
 
         return new ResponseEntity<>(response, status);
     }
 
-    @ExceptionHandler(InvalidDataException.class)
-    public ResponseEntity<ErrorResponse> invalidDataException(InvalidDataException exception, HttpServletRequest request){
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> methodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        StringBuilder erros = new StringBuilder();
+        for(FieldError error : e.getBindingResult().getFieldErrors()){
+            erros.append(error.getDefaultMessage());
+            erros.append(String.format(" (Chave: %s)", error.getField()));
+            erros.append("; ");
+        }
+
         ErrorResponse response = new ErrorResponse(
                 LocalDateTime.now(),
                 status.value(),
-                "Campo inválido",
-                exception.getMessage(),
+                "Argumento inválido",
+                erros.toString(),
                 request.getRequestURI()
         );
 
@@ -40,13 +50,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BookStatusException.class)
-    public ResponseEntity<ErrorResponse> bookStatusException(BookStatusException exception, HttpServletRequest request){
+    public ResponseEntity<ErrorResponse> bookStatusException(BookStatusException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.CONFLICT;
         ErrorResponse response = new ErrorResponse(
                 LocalDateTime.now(),
                 status.value(),
                 "Status do livro divergente",
-                exception.getMessage(),
+                e.getMessage(),
                 request.getRequestURI()
         );
 
@@ -54,13 +64,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DeletionNotAllowedException.class)
-    public ResponseEntity<ErrorResponse> deletionNotAllowedException(DeletionNotAllowedException exception, HttpServletRequest request){
+    public ResponseEntity<ErrorResponse> deletionNotAllowedException(DeletionNotAllowedException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.CONFLICT;
         ErrorResponse response = new ErrorResponse(
                 LocalDateTime.now(),
                 status.value(),
                 "Exclusão não permitida",
-                exception.getMessage(),
+                e.getMessage(),
                 request.getRequestURI()
         );
 

@@ -1,6 +1,5 @@
 package com.andre.librarycompass.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +22,6 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore  // Ignore field when object is parsed to json
     @OneToMany(mappedBy = "user") // A user has many loans
     private List<Loan> loans;
 }
