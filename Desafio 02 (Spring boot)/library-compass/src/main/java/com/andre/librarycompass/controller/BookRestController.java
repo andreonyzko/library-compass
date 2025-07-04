@@ -3,6 +3,7 @@ package com.andre.librarycompass.controller;
 import com.andre.librarycompass.dto.request.BookDTO;
 import com.andre.librarycompass.dto.request.BookPatchDTO;
 import com.andre.librarycompass.dto.response.BookResponseDTO;
+import com.andre.librarycompass.dto.response.LoanResponseDTO;
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.entity.Loan;
 import com.andre.librarycompass.service.BookService;
@@ -64,13 +65,13 @@ public class BookRestController {
 
     // POST /api/livros/{livroId}/emprestar/{usuarioId}: Loan a book to an user.
     @PostMapping("{bookId}/emprestar/{userId}")
-    public Loan loanBookToUser(@PathVariable Long bookId, @PathVariable Long userId){
+    public LoanResponseDTO loanBookToUser(@PathVariable Long bookId, @PathVariable Long userId){
         return bookService.loanBookToUser(bookId, userId);
     }
 
     // POST /api/livros/{livroId}/devolver: Give back a book.
     @PostMapping("/{bookId}/devolver")
-    public Book giveBackBook(@PathVariable Long bookId){
+    public BookResponseDTO giveBackBook(@PathVariable Long bookId){
         return bookService.giveBackBook(bookId);
     }
 }

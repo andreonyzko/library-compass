@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 
 public class UserDTO {
-    @NotNull(message = "Nome do usuário não informado")
     @NotBlank(message = "O nome do usuário não pode ser vazio")
     private String name;
 

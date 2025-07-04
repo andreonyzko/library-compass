@@ -3,6 +3,8 @@ package com.andre.librarycompass.service;
 import com.andre.librarycompass.dto.request.BookDTO;
 import com.andre.librarycompass.dto.request.BookPatchDTO;
 import com.andre.librarycompass.dto.response.BookResponseDTO;
+import com.andre.librarycompass.dto.response.LoanResponseDTO;
+import com.andre.librarycompass.dto.response.UserResponseDTO;
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.entity.Loan;
 import com.andre.librarycompass.entity.User;
@@ -89,7 +91,7 @@ public class BookService{
     }
 
     @Transactional
-    public Loan loanBookToUser(Long bookId, Long userId){
+    public LoanResponseDTO loanBookToUser(Long bookId, Long userId){
         Book book = getBookById(bookId);
         User user = userService.getUserById(userId);
 
@@ -104,12 +106,13 @@ public class BookService{
         user.addLoan(loan); // add loan to user
 
         book.setStatus(BookStatus.EMPRESTADO); // set book status as unavailable
+        loanRepository.save(loan); // when save loan, book and user will update because of cascade
 
-        return loanRepository.save(loan); // when save loan, book and user will update because of cascade
+        return new LoanResponseDTO(new BookResponseDTO(book), new UserResponseDTO(user));
     }
 
     @Transactional
-    public Book giveBackBook(Long bookId){
+    public BookResponseDTO giveBackBook(Long bookId){
         Book book = getBookById(bookId);
 
         if(book.getStatus() != BookStatus.EMPRESTADO || book.getLoan() == null)
@@ -130,6 +133,6 @@ public class BookService{
         book.setStatus(BookStatus.DISPONIVEL); // set book status as available
         bookRepository.save(book);
 
-        return book;
+        return new BookResponseDTO(book);
     }
 }
