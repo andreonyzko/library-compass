@@ -1,7 +1,8 @@
-package com.andre.librarycompass.rest;
+package com.andre.librarycompass.controller;
 
-import com.andre.librarycompass.dto.BookDTO;
-import com.andre.librarycompass.dto.BookResponseDTO;
+import com.andre.librarycompass.dto.request.BookDTO;
+import com.andre.librarycompass.dto.request.BookPatchDTO;
+import com.andre.librarycompass.dto.response.BookResponseDTO;
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.entity.Loan;
 import com.andre.librarycompass.service.BookService;
@@ -48,10 +49,11 @@ public class BookRestController {
         return bookService.save(bookDTO, bookId);
     }
 
-//    @PatchMapping("/{bookId}")
-//    public BookResponseDTO partialUpdateBook(@PathVariable Long bookId, @RequestBody BookDTO bookDTO){
-//        return bookService.partialUpdate(bookId, bookDTO);
-//    }
+    // PATCH /api/livros/{id}: Partial update an existing book.
+    @PatchMapping("/{bookId}")
+    public BookResponseDTO partialUpdateBook(@PathVariable Long bookId, @Valid @RequestBody BookPatchDTO bookDTO){
+        return bookService.partialUpdate(bookId, bookDTO);
+    }
 
     // DELETE /api/livros/{id}: Delete book by id.
     @DeleteMapping("/{bookId}")

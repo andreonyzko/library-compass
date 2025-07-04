@@ -1,8 +1,8 @@
-package com.andre.librarycompass.rest;
+package com.andre.librarycompass.controller;
 
-import com.andre.librarycompass.dto.BookResponseDTO;
-import com.andre.librarycompass.dto.UserDTO;
-import com.andre.librarycompass.dto.UserResponseDTO;
+import com.andre.librarycompass.dto.response.BookResponseDTO;
+import com.andre.librarycompass.dto.request.UserDTO;
+import com.andre.librarycompass.dto.response.UserResponseDTO;
 import com.andre.librarycompass.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

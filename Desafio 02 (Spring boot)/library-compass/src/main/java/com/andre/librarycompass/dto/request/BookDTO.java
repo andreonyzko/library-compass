@@ -1,4 +1,4 @@
-package com.andre.librarycompass.dto;
+package com.andre.librarycompass.dto.request;
 
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.validation.Year;
@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 
 public class BookDTO {
+
     @NotBlank(message = "O título não pode ser vazio")
     private String title;
 
@@ -23,6 +24,7 @@ public class BookDTO {
     @Year
     private Integer yearPublication;
 
+    // Pass BookDTO to a Book Entity
     public Book toEntity(){
         Book book = new Book();
         book.setTitle(title);

@@ -1,4 +1,4 @@
-package com.andre.librarycompass.dto;
+package com.andre.librarycompass.dto.response;
 
 import com.andre.librarycompass.entity.Book;
 import com.andre.librarycompass.entity.enums.BookStatus;

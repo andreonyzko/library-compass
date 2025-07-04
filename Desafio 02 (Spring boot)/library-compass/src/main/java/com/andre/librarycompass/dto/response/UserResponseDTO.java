@@ -1,4 +1,4 @@
-package com.andre.librarycompass.dto;
+package com.andre.librarycompass.dto.response;
 
 import com.andre.librarycompass.entity.User;
 import lombok.Getter;

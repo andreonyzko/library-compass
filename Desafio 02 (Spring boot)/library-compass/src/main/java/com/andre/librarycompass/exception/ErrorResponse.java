@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 
 public class ErrorResponse {
-    private LocalDateTime time;
+    private LocalDateTime moment;
     private Integer status;
     private String error, message, path;
 }

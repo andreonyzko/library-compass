@@ -1,4 +1,4 @@
-package com.andre.librarycompass.dto;
+package com.andre.librarycompass.dto.request;
 
 import com.andre.librarycompass.entity.User;
 import jakarta.validation.constraints.NotBlank;

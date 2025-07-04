@@ -12,6 +12,12 @@ import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    /*
+    Receive the exception and request in the parameters
+    Set the HttpStatus in a variable
+    Create a new ErrorResponse passing moment, status value, a title for the error, description (which is the exception message), finally, the uri of the request
+    return this ErrorResponse with the HttpStatus variable
+     */
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> notFoundException(NotFoundException e, HttpServletRequest request){

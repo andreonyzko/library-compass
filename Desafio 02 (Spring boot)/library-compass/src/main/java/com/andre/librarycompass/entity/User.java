@@ -24,4 +24,14 @@ public class User {
 
     @OneToMany(mappedBy = "user") // A user has many loans
     private List<Loan> loans;
+
+    // Add a loan to the user:
+    public void addLoan(Loan loan){
+        loans.add(loan);
+    }
+
+    // Remove a loan from the user:
+    public void removeLoan(Loan loan){
+        loans.remove(loan);
+    }
 }

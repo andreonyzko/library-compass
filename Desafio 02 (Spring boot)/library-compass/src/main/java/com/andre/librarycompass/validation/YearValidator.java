@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 public class YearValidator implements ConstraintValidator<Year, Integer> {
     @Override
     public boolean isValid(Integer year, ConstraintValidatorContext context) {
-        if(year == null) return true;
+        if(year == null) return true; // if not informed, ignore
+
         int currentYear = LocalDateTime.now().getYear();
         return year <= currentYear;
     }
