@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    body, html{
+        width: 100vw;
+        height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img{
+        width: 250px;
+    }
+
+    .denied-container{
+        max-width: 500px;
+        color: #01987A;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+
+        span{
+            font-size: 2.5em;
+            font-weight: bolder;
+        }
+
+        h1{
+            font-size: 2em;
+        }
+    }
+</style>
+<body>
+<div class="denied-container">
+    <span>403</span>
+    <h1>Acesso negado</h1>
+    <p>Desculpe, mas você não tem permissão para acessar essa página</p>
+    <img th:src="@{/img/restricted.png}"/>
+</div>
+</body>
+</html>

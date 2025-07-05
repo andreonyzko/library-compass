@@ -10,4 +10,14 @@ public class HomeController {
     public String directToHome(){
         return "redirect:/livros";
     }
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
+
+    @GetMapping("/accessDenied")
+    public String acessDenied(){
+        return "accessDenied";
+    }
 }

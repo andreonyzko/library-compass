@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
     <main>
         <div class="page-title-container">
             <h1>Livros</h1>
-            <a class="add-btn btn" th:href="@{/livros/novo}">Cadastrar</a>
+            <a class="add-btn btn" th:href="@{/livros/novo}" sec:authorize="hasRole('ADMIN')">Cadastrar</a>
         </div>
         <hr>
         <div class="table-container">
@@ -23,7 +23,7 @@
                     <th style="width: 20%">Autor</th>
                     <th style="width: 5%">Publicação</th>
                     <th style="width: 10%">Status</th>
-                    <th style="width: 25%">Ação</th>
+                    <th style="width: 25%" sec:authorize="hasRole('ADMIN')">Ação</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,7 @@
                     <td th:text="*{author}"></td>
                     <td th:text="*{yearPublication}"></td>
                     <td th:text="*{status}"></td>
-                    <td class="actions-column">
+                    <td class="actions-column" sec:authorize="hasRole('ADMIN')">
                         <a class="btn edit-btn" th:if="*{status == status.DISPONIVEL}"
                         th:href="@{/livros/emprestimo(id=*{id})}">Emprestar</a>
 
