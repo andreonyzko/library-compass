@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empréstimos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: header"></div>
+    <main>
+        <div class="page-title-container">
+            <h1>Empréstimos</h1>
+        </div>
+        <hr>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Publicação</th>
+                    <th>Ação</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}" th:object="${book}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{title}"></td>
+                    <td th:text="*{author}"></td>
+                    <td th:text="*{yearPublication}"></td>
+                    <td class="actions-column">
+                        <a class="btn edit-btn" th:href="@{/usuarios/devolver(id=*{id})}">Devolver</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

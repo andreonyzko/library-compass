@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Livros</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: header"></div>
+    <main>
+        <div class="page-title-container">
+            <h1>Livros</h1>
+            <a class="add-btn btn" th:href="@{/livros/novo}">Cadastrar</a>
+        </div>
+        <hr>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">ID</th>
+                    <th style="width: 35%">Título</th>
+                    <th style="width: 20%">Autor</th>
+                    <th style="width: 5%">Publicação</th>
+                    <th style="width: 10%">Status</th>
+                    <th style="width: 25%">Ação</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}" th:object="${book}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{title}"></td>
+                    <td th:text="*{author}"></td>
+                    <td th:text="*{yearPublication}"></td>
+                    <td th:text="*{status}"></td>
+                    <td class="actions-column">
+                        <a class="btn edit-btn" th:if="*{status == status.DISPONIVEL}"
+                        th:href="@{/livros/emprestimo(id=*{id})}">Emprestar</a>
+
+                        <a class="btn edit-btn" th:if="*{status == status.EMPRESTADO}"
+                           th:href="@{/livros/devolver(id=*{id})}">Devolver</a>
+
+                        <a class="btn edit-btn" th:href="@{/livros/editar(id=*{id})}">Editar</a>
+
+                        <a class="btn delete-btn" th:href="@{/livros/deletar(id=*{id})}"
+                        th:if="*{status == status.DISPONIVEL}">Deletar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

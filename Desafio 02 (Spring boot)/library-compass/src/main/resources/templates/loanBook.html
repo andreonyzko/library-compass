@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulário de Empréstimo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: header"></div>
+    <main>
+        <div class="page-title-container">
+            <h1>Formulário de Empréstimo</h1>
+        </div>
+        <hr>
+        <form th:action="@{/livros/emprestar(book=${bookId})}" method="post">
+            <div class="input-container">
+                <label for="user">Usuário</label>
+                <select name="user" id="user">
+                    <option th:each="user : ${users}" th:value="${user.getId()}" th:text="${user.getName()}"></option>
+                </select>
+            </div>
+
+            <input class="add-btn btn" type="submit" value="Emprestar">
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulário de Livro</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: header"></div>
+    <main>
+        <div class="page-title-container">
+            <h1>Formulário de Livro</h1>
+        </div>
+        <hr>
+        <form th:action="@{/livros/salvar}" method="post" th:object="${book}">
+            <input type="hidden" name="id" th:field="*{id}">
+
+            <div class="input-container">
+                <label for="title">Título</label>
+                <span class="errors" th:if="${#fields.hasErrors()}" th:errors="*{title}"></span>
+                <input type="text" name="title" id="title" th:field="*{title}">
+            </div>
+
+            <div class="input-container">
+                <label for="author">Autor</label>
+                <span class="errors" th:if="${#fields.hasErrors()}" th:errors="*{author}"></span>
+                <input type="text" name="author" id="author" th:field="*{author}">
+            </div>
+
+            <div class="input-container">
+                <label for="yearPublication">Ano de Publicação</label>
+                <span class="errors" th:if="${#fields.hasErrors()}" th:errors="*{yearPublication}"></span>
+                <input type="number" name="yearPublication" id="yearPublication" th:field="*{yearPublication}">
+            </div>
+
+            <input class="add-btn btn" type="submit" value="Salvar">
+        </form>
+    </main>
+</body>
+</html>

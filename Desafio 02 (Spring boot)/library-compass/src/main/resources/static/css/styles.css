@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+body{
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main{
+    width: 90%;
+}
+
+a{
+    display: inline-block;
+}
+
+header{
+    width: 90%;
+    align-self: start;
+    margin-bottom: 25px;
+
+    background-color: black;
+    color: white;
+    padding: 25px 5%;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+
+    > a{
+        font-weight: bold;
+        font-size: 1.75em;
+    }
+
+    nav{
+        display: flex;
+        gap: 50px;
+
+        a{
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+.page-title-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1{ color: #333; }
+
+hr{
+    border: 0;
+    margin: 25px 0;
+
+    background-color: #333;
+    padding: 1px;
+}
+
+.table-container{
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.btn{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 0;
+
+    cursor: pointer;
+
+    color: white;
+    font-weight: normal;
+    text-decoration: none;
+}
+.add-btn{
+    padding: 10px 15px;
+    background-color: #01987A
+}
+.edit-btn{ background-color: darkcyan; }
+.delete-btn{ background-color: tomato; }
+
+.errors{
+    color: red;
+    font-size: 0.8em;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+
+    thead{
+        background-color: #01987A;
+        th{ color: white; font-weight: bolder; text-align: start; }
+    }
+
+    tbody{
+        td{ font-weight: lighter; }
+        tr:nth-child(even){ background-color: #F3F3F3; }
+    }
+
+    td, th{ padding: 20px; }
+
+    .actions-column{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    min-width: 300px;
+    max-width: 25%;
+
+    .input-container{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    label{
+        width: 100%;
+    }
+
+    input{
+        padding: 10px;
+        border: 1px solid rgba(51, 51, 51, 0.51);
+        border-radius: 2px;
+    }
+}

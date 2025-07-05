@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulário de Usuário</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: header"></div>
+    <main>
+        <div class="page-title-container">
+            <h1>Formulário de Usuário</h1>
+        </div>
+        <hr>
+        <form th:action="@{/usuarios/salvar}" method="post" th:object="${userResponseDTO}">
+            <input type="hidden" name="id" th:field="*{id}">
+
+            <div class="input-container">
+                <label for="name">Nome</label>
+                <span class="errors" th:if="${#fields.hasErrors()}" th:errors="*{name}"></span>
+                <input type="text" name="name" id="name" th:field="*{name}">
+            </div>
+
+            <input class="add-btn btn" type="submit" value="Salvar">
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <a th:href="@{/livros}">
+            <img src="https://compass.uol/content/dam/aircompanycompass/header/logo-desktop.png" alt="logo-compass">
+        </a>
+        <nav>
+            <a th:href="@{/livros}">Livros</a>
+            <a th:href="@{/usuarios}">Usuários</a>
+        </nav>
+    </header>
+</body>
+</html>

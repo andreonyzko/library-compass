@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuários</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/layout :: header"></div>
+    <main>
+        <div class="page-title-container">
+            <h1>Usuários</h1>
+            <a class="add-btn btn" th:href="@{/usuarios/novo}">Cadastrar</a>
+        </div>
+        <hr>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">ID</th>
+                    <th style="width: 70%">Nome</th>
+                    <th style="width: 25%">Ação</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}" th:object="${user}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{name}"></td>
+                    <td class="actions-column">
+                        <a class="btn edit-btn" th:href="@{/usuarios/livros-emprestados(id=*{id})}" th:if="*{!canDelete}">Empréstimos</a>
+                        <a class="btn edit-btn" th:href="@{/usuarios/editar(id=*{id})}">Editar</a>
+                        <a class="btn delete-btn" th:href="@{/usuarios/deletar(id=*{id})}"
+                        th:if="*{canDelete}">Deletar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

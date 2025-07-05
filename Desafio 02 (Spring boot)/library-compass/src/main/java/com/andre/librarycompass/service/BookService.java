@@ -30,7 +30,7 @@ public class BookService{
     private final LoanRepository loanRepository;
     private final UserService userService;
 
-    protected Book getBookById(Long id){
+    public Book getBookById(Long id){
         // Return the Book or throw NotFoundException indicating Book was not found
         return bookRepository.findById(id).orElseThrow(() -> new NotFoundException("Livro não encontrado"));
     }

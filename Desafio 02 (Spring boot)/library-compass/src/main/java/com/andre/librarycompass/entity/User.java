@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data // Generate getters, setters, hashcode and equals
@@ -23,7 +24,7 @@ public class User {
     private String name;
 
     @OneToMany(mappedBy = "user") // A user has many loans
-    private List<Loan> loans;
+    private List<Loan> loans = new ArrayList<>();
 
     // Add a loan to the user:
     public void addLoan(Loan loan){

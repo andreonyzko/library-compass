@@ -6,10 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 
 public class BookDTO {
 
@@ -23,6 +25,12 @@ public class BookDTO {
     @Positive(message = "Ano de publicação não pode ser negativo")
     @Year
     private Integer yearPublication;
+
+    public BookDTO(Book book){
+        title = book.getTitle();
+        author = book.getAuthor();
+        yearPublication = book.getYearPublication();
+    }
 
     // Pass BookDTO to a Book Entity
     public Book toEntity(){
