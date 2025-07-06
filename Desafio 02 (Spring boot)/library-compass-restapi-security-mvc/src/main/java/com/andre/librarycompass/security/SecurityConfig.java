@@ -1,5 +1,6 @@
 package com.andre.librarycompass.security;
 
+import com.andre.librarycompass.exception.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -64,7 +65,7 @@ public class SecurityConfig {
 
         // Change page that's is displayed in access Denied
         http.exceptionHandling(configurer ->
-                configurer.accessDeniedPage("/accessDenied")
+                configurer.accessDeniedHandler(new CustomAccessDeniedHandler())
         );
 
         http.httpBasic(Customizer.withDefaults());
