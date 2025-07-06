@@ -11,6 +11,7 @@ public class UserResponseDTO {
     private Long id;
     private String name;
 
+    // Create UserResponseDTO from User entity
     public UserResponseDTO(User user){
         id = user.getId();
         name = user.getName();

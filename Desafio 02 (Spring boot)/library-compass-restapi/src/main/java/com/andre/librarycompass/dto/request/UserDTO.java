@@ -13,6 +13,7 @@ public class UserDTO {
     @NotBlank(message = "O nome do usuário não pode ser vazio")
     private String name;
 
+    // Pass UserDTO to User entity
     public User toEntity(){
         User user = new User();
         user.setName(name);

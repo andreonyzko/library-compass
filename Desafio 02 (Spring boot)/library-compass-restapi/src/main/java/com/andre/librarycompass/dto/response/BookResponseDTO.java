@@ -14,6 +14,7 @@ public class BookResponseDTO {
     private Integer yearPublication;
     private BookStatus status;
 
+    // Create BookResponseDTO from a Book entity
     public BookResponseDTO(Book book){
         id = book.getId();
         title = book.getTitle();
