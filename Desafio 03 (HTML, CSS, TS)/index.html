@@ -113,6 +113,30 @@
         </form>
       </section>
     </template>
+
+    <template id="users-template">
+      <section id="users">
+        <article class="user">
+          <img src="images/user.png" alt="user image">
+          <div class="user-info">
+            <p class="username">User</p>
+            <button class="btn-user-loans">See loans</button> <br>
+            <button class="btn-user-edit">Update</button>
+            <button class="btn-user-delete">Delete</button>
+          </div>
+        </article>
+      </section>
+    </template>
+
+    <template id="user-form-template">
+      <section id="user-form" class="form">
+        <form>
+          <img src="images/user.png" alt="user image">
+          <input type="text" name="username" id="username" placeholder="Name">
+          <button type="submit">Save</button>
+        </form>
+      </section>
+    </template>
   </main>
 
   <script type="module" src="/src/main.ts"></script>
