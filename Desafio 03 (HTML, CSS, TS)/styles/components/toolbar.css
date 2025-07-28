@@ -1,0 +1,48 @@
+#toolbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    form {
+        flex-grow: 1;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--black);
+        }
+
+        input {
+            flex-grow: 1;
+
+            border: 0;
+            color: var(--grey);
+            font-size: 1.1em;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+
+    button {
+        background-color: var(--yellow);
+        color: var(--grey);
+        border: 0;
+        border-radius: 5px;
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 2.5em;
+        font-weight: 200;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
