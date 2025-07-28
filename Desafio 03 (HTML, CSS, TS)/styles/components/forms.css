@@ -16,6 +16,10 @@
             width: 100%;
         }
 
+        h1{
+            text-align: center;
+        }
+
         p.input-container {
             display: flex;
             flex-direction: column;
