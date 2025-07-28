@@ -51,4 +51,8 @@
             font-size: 0.8em;
         }
     }
+
+    @media screen and (min-width: 1024px) {
+        grid-template: 1fr / repeat(5, 1fr);
+    }
 }

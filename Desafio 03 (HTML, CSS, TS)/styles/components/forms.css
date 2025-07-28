@@ -39,6 +39,14 @@
             font-size: 1.2em;
         }
     }
+
+    @media screen and (min-width: 1024px) {
+        width: auto;
+
+        form {
+            width: 20%;
+        }
+    }
 }
 
 #book-form {
@@ -58,13 +66,18 @@
             }
         }
     }
-
 }
 
 #loan-form {
     form {
         width: 80%;
         gap: 20px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        form {
+            width: 30%;
+        }
     }
 }
 

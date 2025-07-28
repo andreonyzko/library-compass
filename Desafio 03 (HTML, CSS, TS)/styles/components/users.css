@@ -37,4 +37,25 @@
             }
         }
     }
+
+    @media screen and (min-width: 1024px) {
+        display: grid;
+        grid-template: 1fr / repeat(3, 1fr);
+
+        .user {
+
+            img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .user-info {
+                font-size: 1.2em;
+
+                button {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
 }

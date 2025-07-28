@@ -1,4 +1,12 @@
 @import url('reset.css') layer(reset);
 @import url('base.css') layer(base);
 
-@layer reset, base;
+@import url('layout/header.css') layer(layout);
+@import url('layout/main.css') layer(layout);
+
+@import url('components/toolbar.css') layer(components);
+@import url('components/forms.css') layer(components);
+@import url('components/books.css') layer(components);
+@import url('components/users.css') layer(components);
+
+@layer reset, base, layout, components;
