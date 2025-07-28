@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --white: white;
+    --black: black;
+    --yellow: #FFCD00;
+    --light-yellow: #FFE680;
+    --grey: #4D4D4D;
+
+    --primary-font: 'Raleway', serif;
+}
+
+body {
+    display: grid;
+    grid-template: auto 1fr/ 1fr;
+}
+
+button {
+    cursor: pointer;
+}

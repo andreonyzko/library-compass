@@ -1,0 +1,64 @@
+header {
+    background-color: var(--black);
+    color: var(--white);
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    #logo-header-container {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    #logo-header {
+        width: 150px;
+    }
+
+    #menu-btn {
+        background-color: var(--black);
+        border: 0;
+        margin-right: 20px;
+
+        svg {
+            width: 35px;
+            fill: var(--white);
+        }
+    }
+
+    nav {
+        display: none;
+
+        flex-basis: 100%;
+
+        #nav-list {
+            list-style: none;
+            font-size: 1.1em;
+
+            .nav-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 20px;
+
+                cursor: pointer;
+            }
+
+            svg {
+                width: 16px;
+                height: 16px;
+                fill: var(--white);
+            }
+
+            .current-page {
+                border-radius: 0 10px 10px 0;
+                background-color: var(--yellow);
+                color: var(--grey);
+
+                svg {
+                    fill: var(--grey);
+                }
+            }
+        }
+    }
+}
