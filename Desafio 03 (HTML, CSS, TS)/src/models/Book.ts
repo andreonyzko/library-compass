@@ -3,6 +3,8 @@ import BookForm from "../forms/BookForm";
 import LoanForm from "../forms/LoanForm";
 import Router from "../router/Router";
 import type { BookType } from "../services/BookService";
+import BookService from "../services/BookService";
+import Books from "../ui/Books";
 import { BookStatus } from "../utils/BookStatus";
 
 export default
@@ -15,7 +17,8 @@ class Book extends Component{
     
     constructor(
         private root: HTMLElement,
-        private bookData: BookType
+        private bookData: BookType,
+        private loadBooksPage: () => void
     ){
         super('book-template');
         this.giveBackBtn = this.element.querySelector('.giveback-book-btn')! as HTMLButtonElement;
@@ -46,7 +49,14 @@ class Book extends Component{
     configure(){
         if(this.loanBtn.style.display !== 'none'){
             this.loanBtn.addEventListener('click', () => {
-                this.router.render([new LoanForm(this.bookData.id).element]);
+                this.router.render([new LoanForm(this.bookData.id, this.loadBooksPage).element]);
+            })
+        }
+
+        if(this.giveBackBtn.style.display !== 'none'){
+            this.giveBackBtn.addEventListener('click', async () => {
+                await BookService.giveback(this.bookData.id);
+                this.loadBooksPage();
             })
         }
 

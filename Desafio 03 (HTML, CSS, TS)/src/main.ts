@@ -23,7 +23,7 @@ new Nav((route) => {
 
 // Functions
 function loadBooksPage() {
-  router.render([new ToolBar(loadBookForm).element, new Books().element]);
+  router.render([new ToolBar(loadBookForm).element, new Books(loadBooksPage).element]);
 }
 
 function loadUsersPage() {

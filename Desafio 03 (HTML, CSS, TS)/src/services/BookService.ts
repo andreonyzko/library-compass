@@ -26,4 +26,14 @@ class BookService{
         
         return resp;
     }
+
+    static async giveback(bookId: number): Promise<any> {
+        const resp = await fetch(`${API_URL}/${bookId}/devolver`,
+            {
+                method: 'POST'
+            }
+        );
+
+        return resp;
+    }
 }

@@ -4,7 +4,7 @@ import BookService from "../services/BookService";
 
 export default
 class Books extends Component{
-    constructor(){
+    constructor(private loadBooksPage: () => void){
         super('books-template');
         this.getBooks();
     }
@@ -22,7 +22,7 @@ class Books extends Component{
 
         this.element.innerHTML = ''
         books.forEach(book => {
-            new Book(this.element, book);
+            new Book(this.element, book, this.loadBooksPage);
         })
     }
 }

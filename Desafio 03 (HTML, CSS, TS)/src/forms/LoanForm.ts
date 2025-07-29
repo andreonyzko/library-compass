@@ -7,7 +7,7 @@ class LoanForm extends Component{
     private form: HTMLFormElement;
     private selectEl: HTMLSelectElement;
 
-    constructor(private bookId: number){
+    constructor(private bookId: number, private loadBooksPage: () => void){
         super('loan-form-template');
         this.form = this.element.querySelector('form')! as HTMLFormElement;
         this.selectEl = this.element.querySelector('select')! as HTMLSelectElement;
@@ -33,7 +33,9 @@ class LoanForm extends Component{
             e.preventDefault();
             const userId = +this.selectEl.value;
 
-            BookService.loan(this.bookId, userId);
+            await BookService.loan(this.bookId, userId);
+
+            this.loadBooksPage();
         })
     }
 }
