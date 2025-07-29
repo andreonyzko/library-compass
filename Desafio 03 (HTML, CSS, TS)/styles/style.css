@@ -1,6 +1,6 @@
 @import url('reset.css') layer(reset);
-@import url('base.css') layer(base);
 
+@import url('layout/base.css') layer(base);
 @import url('layout/header.css') layer(layout);
 @import url('layout/main.css') layer(layout);
 
