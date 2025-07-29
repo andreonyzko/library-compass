@@ -12,14 +12,14 @@ import { BookStatus } from "../utils/BookStatus";
 
 export default
 class Book extends Component{
-    private giveBackBtn: HTMLButtonElement;
-    private loanBtn: HTMLButtonElement;
-    private editBtn: HTMLButtonElement;
-    private deleteBtn: HTMLButtonElement;
+    protected giveBackBtn: HTMLButtonElement;
+    protected loanBtn: HTMLButtonElement;
+    protected editBtn: HTMLButtonElement;
+    protected deleteBtn: HTMLButtonElement;
     
     constructor(
         private root: HTMLElement,
-        private bookData: BookType,
+        protected bookData: BookType,
     ){
         super('book-template');
         this.giveBackBtn = this.element.querySelector('.giveback-book-btn')! as HTMLButtonElement;

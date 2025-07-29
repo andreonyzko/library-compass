@@ -6,6 +6,8 @@ import UserService from "../services/UserService";
 
 import { loadUsersPage } from "../main";
 import type { UserType } from "../services/Types";
+import Title from "../ui/Title";
+import UserLoans from "../ui/UserLoans";
 
 export default
 class User extends Component{
@@ -40,6 +42,15 @@ class User extends Component{
     }
 
     configure(){
+        if(this.loansBtn.style.display !== 'none'){
+            this.loansBtn.addEventListener('click', () => {
+                Router.render([
+                    new Title(`${this.userData.name}'s Loans`).element,
+                    new UserLoans(this.userData.id).element
+                ])
+            })
+        }
+
         this.editBtn.addEventListener('click', () => {
             Router.render([new UserForm(this.userData).element]);
         })
