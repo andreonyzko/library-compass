@@ -17,6 +17,36 @@ class BookService{
         return res.json();
     }
 
+    static async register(bookJSON: string): Promise<any>{
+        const resp = await fetch(API_URL, 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                
+                body: bookJSON
+            }
+        )
+
+        return resp;
+    }
+
+    static async update(bookId: number, bookJSON: string): Promise<any>{
+        const resp = await fetch(`${API_URL}/${bookId}`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: bookJSON
+            }
+        )
+
+        return resp;
+    }
+
     static async loan(bookId: number, userId: number): Promise<any>{
         const resp = await fetch(`${API_URL}/${bookId}/emprestar/${userId}`,
             {

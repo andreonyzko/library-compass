@@ -4,7 +4,6 @@ import LoanForm from "../forms/LoanForm";
 import Router from "../router/Router";
 import type { BookType } from "../services/BookService";
 import BookService from "../services/BookService";
-import Books from "../ui/Books";
 import { BookStatus } from "../utils/BookStatus";
 
 export default
@@ -48,7 +47,7 @@ class Book extends Component{
 
     configure(){
         if(this.loanBtn.style.display !== 'none'){
-            this.loanBtn.addEventListener('click', () => {
+            this.loanBtn.addEventListener('click', async () => {
                 this.router.render([new LoanForm(this.bookData.id, this.loadBooksPage).element]);
             })
         }
@@ -61,7 +60,7 @@ class Book extends Component{
         }
 
         this.editBtn.addEventListener('click', () => {
-            this.router.render([new BookForm(this.bookData).element]);
+            this.router.render([new BookForm(this.loadBooksPage, this.bookData).element]);
         })
 
         this.attach();

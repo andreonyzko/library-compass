@@ -31,7 +31,7 @@ function loadUsersPage() {
 }
 
 function loadBookForm(){
-  router.render([new BookForm().element]);
+  router.render([new BookForm(loadBooksPage).element]);
 }
 
 function loadUserForm() {

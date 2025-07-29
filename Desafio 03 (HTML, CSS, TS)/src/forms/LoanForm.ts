@@ -5,12 +5,12 @@ import UserService from "../services/UserService";
 export default
 class LoanForm extends Component{
     private form: HTMLFormElement;
-    private selectEl: HTMLSelectElement;
+    private userSelect: HTMLSelectElement;
 
     constructor(private bookId: number, private loadBooksPage: () => void){
         super('loan-form-template');
         this.form = this.element.querySelector('form')! as HTMLFormElement;
-        this.selectEl = this.element.querySelector('select')! as HTMLSelectElement;
+        this.userSelect = this.element.querySelector('select')! as HTMLSelectElement;
 
         this.renderContent();
     }
@@ -22,7 +22,7 @@ class LoanForm extends Component{
             const optionEl = document.createElement('option');
             optionEl.value = user.id.toString();
             optionEl.textContent = user.name;
-            this.selectEl.appendChild(optionEl);
+            this.userSelect.appendChild(optionEl);
         });
 
         this.configure();
@@ -31,7 +31,7 @@ class LoanForm extends Component{
     configure(){
         this.form.addEventListener('submit', async e => {
             e.preventDefault();
-            const userId = +this.selectEl.value;
+            const userId = +this.userSelect.value;
 
             await BookService.loan(this.bookId, userId);
 
