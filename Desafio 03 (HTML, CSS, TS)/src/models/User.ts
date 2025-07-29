@@ -44,6 +44,13 @@ class User extends Component{
             this.router.render([new UserForm(this.loadUsersPage, this.userData).element]);
         })
 
+        if(this.deleteBtn.style.display !== 'none'){
+            this.deleteBtn.addEventListener('click', async () => {
+                await UserService.delete(this.userData.id);
+                this.loadUsersPage();
+            })
+        }
+
         this.attach();
     }
 

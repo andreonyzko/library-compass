@@ -44,6 +44,16 @@ class UserService{
         return resp;
     }
 
+    static async delete(userId: number){
+        const resp = await fetch(`${API_URL}/${userId}`, 
+            {
+                method: 'DELETE',
+            }
+        )
+
+        return resp;
+    }
+
     static async getLoans(userId: number): Promise<BookType[]>{
         const resp = await fetch(`${API_URL}/${userId}/livros-emprestados`);
         return resp.json();
