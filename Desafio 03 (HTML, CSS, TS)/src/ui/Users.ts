@@ -18,7 +18,7 @@ class Users extends Component{
         if(users.length === 0) return;
 
         this.element.innerHTML = ''
-        users.forEach(async user => {
+        users.forEach(user => {
             new User(this.element, user);
         })
     }

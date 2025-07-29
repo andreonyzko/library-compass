@@ -2,9 +2,9 @@ import { AutoBind } from "../utils/Autobind";
 
 export default
 class Nav{
-    navElement: HTMLElement;
-    menuBtn: HTMLButtonElement;
-    navItems: NodeListOf<HTMLLIElement>;
+    private navElement: HTMLElement;
+    private menuBtn: HTMLButtonElement;
+    private navItems: NodeListOf<HTMLLIElement>;
 
     constructor(private onNavigate: (route: string) => void){
         this.navElement = document.querySelector('nav')! as HTMLElement;
@@ -33,7 +33,7 @@ class Nav{
 
         li.classList.add('current-page');
 
-        const route = li.textContent!.trim().toLowerCase();
+        const route = li.dataset.route!;
         this.onNavigate(route);
     }
 }

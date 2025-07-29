@@ -1,7 +1,7 @@
 export default
 abstract class Component{
-    template: HTMLTemplateElement;
-    element: HTMLElement;
+    private template: HTMLTemplateElement;
+    public element: HTMLElement;
 
     constructor(templateId: string){
         this.template = document.getElementById(templateId)! as HTMLTemplateElement;

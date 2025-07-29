@@ -24,7 +24,7 @@
 
     <nav>
       <ul id="nav-list">
-        <li class="nav-item current-page">
+        <li class="nav-item current-page" data-route="library">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#e3e3e3">
             <path d="M0 0h24v24H0z" fill="none" />
             <path
@@ -33,7 +33,7 @@
           Library
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" data-route="users">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#e3e3e3">
             <path d="M0 0h24v24H0z" fill="none" />
             <path
@@ -60,7 +60,7 @@
         </label>
         <input type="text" name="search" id="search-book" placeholder="Começar a procurar...">
       </form>
-      <button>+</button>
+      <button id="add-btn">+</button>
     </section>
   </template>
 
@@ -133,7 +133,7 @@
         <div class="user-info">
           <p class="username">User</p>
           <button class="user-loans-btn">See loans</button> <br>
-          <button class="update-user-btn">Update</button>
+          <button class="edit-user-btn">Update</button>
           <button class="delete-user-btn">Delete</button>
         </div>
       </article>
