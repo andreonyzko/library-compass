@@ -1,13 +1,14 @@
 import Component from "../base/Component";
 import type { UserType } from "../services/UserService";
 import UserService from "../services/UserService";
+import { loadUsersPage } from "../main";
 
 export default
 class UserForm extends Component{
     private form: HTMLFormElement;
     private nameInput: HTMLInputElement;
 
-    constructor(private loadUsersPage: () => void, private userData?: UserType){
+    constructor(private userData?: UserType){
         super('user-form-template');
 
         this.form = this.element.querySelector('form')! as HTMLFormElement;
@@ -31,11 +32,11 @@ class UserForm extends Component{
            
             if(this.userData){
                 await UserService.update(this.userData.id, userJSON);
-                this.loadUsersPage();
+                loadUsersPage();
             }
             else{
                 await UserService.register(userJSON);
-                this.loadUsersPage();
+                loadUsersPage();
             }
         })
     }

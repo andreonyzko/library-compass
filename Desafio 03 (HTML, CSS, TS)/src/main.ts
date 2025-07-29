@@ -22,18 +22,10 @@ new Nav((route) => {
 });
 
 // Functions
-function loadBooksPage() {
-  router.render([new ToolBar(loadBookForm).element, new Books(loadBooksPage).element]);
+export function loadBooksPage() {
+  router.render([new ToolBar('books').element, new Books().element]);
 }
 
-function loadUsersPage() {
-  router.render([new ToolBar(loadUserForm).element, new Users(loadUsersPage).element]);
-}
-
-function loadBookForm(){
-  router.render([new BookForm(loadBooksPage).element]);
-}
-
-function loadUserForm() {
-  router.render([new UserForm(loadUsersPage).element])
+export function loadUsersPage() {
+  router.render([new ToolBar('users').element, new Users().element]);
 }

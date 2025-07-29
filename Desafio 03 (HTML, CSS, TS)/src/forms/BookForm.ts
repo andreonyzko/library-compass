@@ -1,6 +1,7 @@
 import Component from "../base/Component";
 import type { BookType } from "../services/BookService";
 import BookService from "../services/BookService";
+import { loadBooksPage } from "../main";
 
 export default
     class BookForm extends Component {
@@ -9,7 +10,7 @@ export default
     private authorInput: HTMLInputElement;
     private yearInput: HTMLInputElement;
 
-    constructor(private loadBookPage: () => void, private bookData?: BookType) {
+    constructor(private bookData?: BookType) {
         super('book-form-template');
 
         this.form = this.element.querySelector('form')! as HTMLFormElement;
@@ -42,11 +43,11 @@ export default
 
             if (this.bookData) {
                 await BookService.update(this.bookData.id, bookJSON);
-                this.loadBookPage();
+                loadBooksPage();
             }
             else {
                 await BookService.register(bookJSON);
-                this.loadBookPage();
+                loadBooksPage();
             }
         })
     }

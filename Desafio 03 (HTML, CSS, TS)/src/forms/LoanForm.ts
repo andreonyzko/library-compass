@@ -1,13 +1,14 @@
 import Component from "../base/Component";
 import BookService from "../services/BookService";
 import UserService from "../services/UserService";
+import { loadBooksPage } from "../main";
 
 export default
 class LoanForm extends Component{
     private form: HTMLFormElement;
     private userSelect: HTMLSelectElement;
 
-    constructor(private bookId: number, private loadBooksPage: () => void){
+    constructor(private bookId: number){
         super('loan-form-template');
         this.form = this.element.querySelector('form')! as HTMLFormElement;
         this.userSelect = this.element.querySelector('select')! as HTMLSelectElement;
@@ -35,7 +36,7 @@ class LoanForm extends Component{
 
             await BookService.loan(this.bookId, userId);
 
-            this.loadBooksPage();
+            loadBooksPage();
         })
     }
 }
