@@ -3,6 +3,7 @@ import Router from "./router/Router";
 import Books from "./ui/Books";
 import Users from "./ui/Users";
 import ToolBar from "./ui/Toolbar";
+import Title from "./ui/Title";
 
 loadBooksPage();
 
@@ -20,9 +21,9 @@ new Nav((route) => {
 
 // Functions
 export function loadBooksPage() {
-  Router.render([new ToolBar('books').element, new Books().element]);
+  Router.render([new Title('Books').element, new ToolBar('books').element, new Books().element]);
 }
 
 export function loadUsersPage() {
-  Router.render([new ToolBar('users').element, new Users().element]);
+  Router.render([new Title('Users').element, new ToolBar('users').element, new Users().element]);
 }
