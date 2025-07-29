@@ -4,7 +4,7 @@ import UserService from "../services/UserService";
 
 export default
 class Users extends Component{
-    constructor(){
+    constructor(private loadUsersPage: () => void){
         super('users-template');
         this.getUsers();
     }
@@ -22,7 +22,7 @@ class Users extends Component{
 
         this.element.innerHTML = ''
         users.forEach(user => {
-            new User(this.element, user);
+            new User(this.element, user, this.loadUsersPage);
         })
     }
 }

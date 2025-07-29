@@ -13,7 +13,8 @@ class User extends Component{
 
     constructor(
         private root: HTMLElement,
-        private userData: UserType
+        private userData: UserType,
+        private loadUsersPage: () => void
     ){
         super('user-template');
         this.loansBtn = this.element.querySelector('.user-loans-btn')! as HTMLButtonElement;
@@ -40,7 +41,7 @@ class User extends Component{
 
     configure(){
         this.editBtn.addEventListener('click', () => {
-            this.router.render([new UserForm(this.userData).element]);
+            this.router.render([new UserForm(this.loadUsersPage, this.userData).element]);
         })
 
         this.attach();
