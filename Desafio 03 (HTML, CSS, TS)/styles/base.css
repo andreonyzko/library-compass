@@ -23,7 +23,7 @@ button {
     cursor: pointer;
 }
 
-.not-found{
+.load-message{
     grid-column: span 5;
     text-align: center;
 }

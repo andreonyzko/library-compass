@@ -15,7 +15,10 @@ class Users extends Component{
     }
 
     private renderUsers(users: any[]){
-        if(users.length === 0) return;
+        if(users.length === 0){
+            this.element.querySelector('.load-message')!.textContent = 'No users found';
+            return;
+        };
 
         this.element.innerHTML = ''
         users.forEach(user => {

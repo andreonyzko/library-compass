@@ -15,7 +15,10 @@ class Books extends Component{
     }
 
     private renderBooks(books: any[]){
-        if(books.length === 0) return;
+        if(books.length === 0){
+            this.element.querySelector('.load-message')!.textContent = 'No books found';
+            return;
+        };
 
         this.element.innerHTML = ''
         books.forEach(book => {

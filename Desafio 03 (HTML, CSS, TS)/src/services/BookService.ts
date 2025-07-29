@@ -16,4 +16,14 @@ class BookService{
         const res = await fetch(API_URL);
         return res.json();
     }
+
+    static async loan(bookId: number, userId: number): Promise<any>{
+        const resp = await fetch(`${API_URL}/${bookId}/emprestar/${userId}`,
+            {
+                method: 'POST',
+            }
+        );
+        
+        return resp;
+    }
 }

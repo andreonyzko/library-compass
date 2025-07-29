@@ -46,7 +46,7 @@ class Book extends Component{
     configure(){
         if(this.loanBtn.style.display !== 'none'){
             this.loanBtn.addEventListener('click', () => {
-                this.router.render([new LoanForm().element]);
+                this.router.render([new LoanForm(this.bookData.id).element]);
             })
         }
 
