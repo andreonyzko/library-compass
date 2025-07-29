@@ -22,3 +22,8 @@ body {
 button {
     cursor: pointer;
 }
+
+.not-found{
+    grid-column: span 5;
+    text-align: center;
+}

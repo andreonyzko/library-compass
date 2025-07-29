@@ -80,10 +80,8 @@ header {
             flex-basis: auto;
 
             #nav-list {
-                font-size: 0.9em;
-
                 .nav-item {
-                    width: 175px;
+                    width: 200px;
                     padding: 15px 20px;
                     margin-right: 25px;
                 }
