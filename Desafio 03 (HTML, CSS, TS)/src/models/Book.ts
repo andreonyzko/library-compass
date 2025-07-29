@@ -1,11 +1,14 @@
 import Component from "../base/Component";
+import Router from "../router/Router";
+
 import BookForm from "../forms/BookForm";
 import LoanForm from "../forms/LoanForm";
-import Router from "../router/Router";
-import type { BookType } from "../services/BookService";
 import BookService from "../services/BookService";
-import { BookStatus } from "../utils/BookStatus";
+
 import { loadBooksPage } from "../main";
+import type { BookType } from "../services/Types";
+import { BookStatus } from "../utils/BookStatus";
+
 
 export default
 class Book extends Component{

@@ -1,7 +1,8 @@
 import Component from "../base/Component";
+import Router from "../router/Router";
+
 import BookForm from "../forms/BookForm";
 import UserForm from "../forms/UserForm";
-import Router from "../router/Router";
 
 export default
 class ToolBar extends Component{

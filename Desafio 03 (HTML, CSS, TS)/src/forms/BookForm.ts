@@ -1,7 +1,8 @@
 import Component from "../base/Component";
-import type { BookType } from "../services/BookService";
 import BookService from "../services/BookService";
+
 import { loadBooksPage } from "../main";
+import type { BookType } from "../services/Types";
 
 export default
     class BookForm extends Component {

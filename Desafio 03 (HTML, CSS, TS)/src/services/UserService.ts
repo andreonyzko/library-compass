@@ -1,9 +1,5 @@
-import type { BookType } from "./BookService";
-
-export interface UserType{
-    id: number;
-    name: string;
-}
+import type { UserType } from "./Types";
+import type { BookType } from "./Types";
 
 const API_URL = 'http://localhost:8080/api/usuarios';
 

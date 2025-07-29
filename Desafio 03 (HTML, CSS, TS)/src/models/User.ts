@@ -1,9 +1,11 @@
 import Component from "../base/Component";
-import UserForm from "../forms/UserForm";
 import Router from "../router/Router";
-import type { UserType } from "../services/UserService";
+
+import UserForm from "../forms/UserForm";
 import UserService from "../services/UserService";
+
 import { loadUsersPage } from "../main";
+import type { UserType } from "../services/Types";
 
 export default
 class User extends Component{

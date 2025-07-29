@@ -1,9 +1,10 @@
 import Nav from "./ui/Nav";
 import Router from "./router/Router";
+
+import Title from "./ui/Title";
+import ToolBar from "./ui/Toolbar";
 import Books from "./ui/Books";
 import Users from "./ui/Users";
-import ToolBar from "./ui/Toolbar";
-import Title from "./ui/Title";
 
 loadBooksPage();
 
@@ -21,7 +22,7 @@ new Nav((route) => {
 
 // Functions
 export function loadBooksPage() {
-  Router.render([new Title('Books').element, new ToolBar('books').element, new Books().element]);
+  Router.render([new Title('Library').element, new ToolBar('books').element, new Books().element]);
 }
 
 export function loadUsersPage() {
