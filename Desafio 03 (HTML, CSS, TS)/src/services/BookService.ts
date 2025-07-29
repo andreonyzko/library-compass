@@ -17,14 +17,14 @@ class BookService{
         return res.json();
     }
 
-    static async register(bookJSON: string): Promise<any>{
+    static async register(bookJSON: string){
         const resp = await fetch(API_URL, 
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                
+
                 body: bookJSON
             }
         )
@@ -32,7 +32,7 @@ class BookService{
         return resp;
     }
 
-    static async update(bookId: number, bookJSON: string): Promise<any>{
+    static async update(bookId: number, bookJSON: string){
         const resp = await fetch(`${API_URL}/${bookId}`,
             {
                 method: 'PUT',
@@ -47,7 +47,17 @@ class BookService{
         return resp;
     }
 
-    static async loan(bookId: number, userId: number): Promise<any>{
+    static async delete(bookId: number){
+        const resp = await fetch(`${API_URL}/${bookId}`,
+            {
+                method: 'DELETE'
+            }
+        )
+
+        return resp;
+    }
+
+    static async loan(bookId: number, userId: number){
         const resp = await fetch(`${API_URL}/${bookId}/emprestar/${userId}`,
             {
                 method: 'POST',
@@ -57,7 +67,7 @@ class BookService{
         return resp;
     }
 
-    static async giveback(bookId: number): Promise<any> {
+    static async giveback(bookId: number){
         const resp = await fetch(`${API_URL}/${bookId}/devolver`,
             {
                 method: 'POST'

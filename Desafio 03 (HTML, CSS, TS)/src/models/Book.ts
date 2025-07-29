@@ -63,6 +63,13 @@ class Book extends Component{
             this.router.render([new BookForm(this.loadBooksPage, this.bookData).element]);
         })
 
+        if(this.deleteBtn.style.display !== 'none'){
+            this.deleteBtn.addEventListener('click', async () => {
+                await BookService.delete(this.bookData.id);
+                this.loadBooksPage();
+            })
+        }
+
         this.attach();
     }
 
