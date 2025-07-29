@@ -10,7 +10,6 @@ class User extends Component{
     private loansBtn: HTMLButtonElement;
     private editBtn: HTMLButtonElement;
     private deleteBtn: HTMLButtonElement;
-    private router: Router;
 
     constructor(
         private root: HTMLElement,
@@ -20,7 +19,6 @@ class User extends Component{
         this.loansBtn = this.element.querySelector('.user-loans-btn')! as HTMLButtonElement;
         this.editBtn = this.element.querySelector('.edit-user-btn')! as HTMLButtonElement;
         this.deleteBtn = this.element.querySelector('.delete-user-btn')! as HTMLButtonElement;
-        this.router = new Router();
 
         this.renderContent();
     }
@@ -41,7 +39,7 @@ class User extends Component{
 
     configure(){
         this.editBtn.addEventListener('click', () => {
-            this.router.render([new UserForm(this.userData).element]);
+            Router.render([new UserForm(this.userData).element]);
         })
 
         if(this.deleteBtn.style.display !== 'none'){

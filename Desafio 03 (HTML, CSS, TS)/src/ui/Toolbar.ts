@@ -5,26 +5,25 @@ import Router from "../router/Router";
 
 export default
 class ToolBar extends Component{
-    private router = new Router();
     private addBtn: HTMLButtonElement;
 
     constructor(private page: 'books'|'users'){
         super('toolbar-template');
         this.addBtn = this.element.querySelector('#add-btn')! as HTMLButtonElement;
         
-        if(page === 'books') this.configureBooksPage();
-        else if(page === 'users') this.configureUsersPage();
+        if(this.page === 'books') this.configureBooksPage();
+        else if(this.page === 'users') this.configureUsersPage();
     }
 
     configureBooksPage(){
         this.addBtn.addEventListener('click', () => {
-            this.router.render([new BookForm().element]);
+            Router.render([new BookForm().element]);
         });
     }
 
     configureUsersPage(){
         this.addBtn.addEventListener('click', () => {
-            this.router.render([new UserForm().element]);
+            Router.render([new UserForm().element]);
         });
     }
 }

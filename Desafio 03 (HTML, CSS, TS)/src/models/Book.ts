@@ -9,7 +9,6 @@ import { loadBooksPage } from "../main";
 
 export default
 class Book extends Component{
-    private router = new Router();
     private giveBackBtn: HTMLButtonElement;
     private loanBtn: HTMLButtonElement;
     private editBtn: HTMLButtonElement;
@@ -48,7 +47,7 @@ class Book extends Component{
     configure(){
         if(this.loanBtn.style.display !== 'none'){
             this.loanBtn.addEventListener('click', async () => {
-                this.router.render([new LoanForm(this.bookData.id).element]);
+                Router.render([new LoanForm(this.bookData.id).element]);
             })
         }
 
@@ -60,7 +59,7 @@ class Book extends Component{
         }
 
         this.editBtn.addEventListener('click', () => {
-            this.router.render([new BookForm(this.bookData).element]);
+            Router.render([new BookForm(this.bookData).element]);
         })
 
         if(this.deleteBtn.style.display !== 'none'){
