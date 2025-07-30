@@ -23,7 +23,14 @@ button {
     cursor: pointer;
 }
 
-.load-message{
+#error-msg {
+    background-color: red;
+    text-align: center;
+    padding: 10px 20px !important;
+    margin: 0 !important;
+}
+
+.load-message {
     grid-column: span 5;
     text-align: center;
 }

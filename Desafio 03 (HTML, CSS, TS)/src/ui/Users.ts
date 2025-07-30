@@ -2,21 +2,27 @@ import Component from "../base/Component";
 
 import User from "../models/User";
 import UserService from "../services/UserService";
+import { showErrorMsg } from "../utils/ErrorHandler";
 
 export default
-class Users extends Component{
-    constructor(){
+    class Users extends Component {
+    constructor() {
         super('users-template');
         this.getUsers();
     }
 
-    private async getUsers(){
-        const users = await UserService.getAll();
-        this.renderUsers(users);
+    private async getUsers() {
+        try {
+            const users = await UserService.getAll();
+            this.renderUsers(users);
+        }
+        catch (error) {
+            showErrorMsg((error as Error).message);
+        }
     }
 
-    private renderUsers(users: any[]){
-        if(users.length === 0){
+    private renderUsers(users: any[]) {
+        if (users.length === 0) {
             this.element.querySelector('.load-message')!.textContent = 'No users found';
             return;
         };

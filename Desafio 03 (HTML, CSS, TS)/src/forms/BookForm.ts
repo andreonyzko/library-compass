@@ -3,6 +3,7 @@ import BookService from "../services/BookService";
 
 import { loadBooksPage } from "../main";
 import type { BookType } from "../services/Types";
+import { showErrorMsg } from "../utils/ErrorHandler";
 
 export default
     class BookForm extends Component {
@@ -35,20 +36,25 @@ export default
 
     private configure() {
         this.form.addEventListener('submit', async e => {
-            e.preventDefault();
+            try {
+                e.preventDefault();
 
-            const title = this.titleInput.value;
-            const author = this.authorInput.value;
-            const yearPublication = this.yearInput.value;
-            const bookJSON = JSON.stringify({title, author, yearPublication});
+                const title = this.titleInput.value;
+                const author = this.authorInput.value;
+                const yearPublication = this.yearInput.value;
+                const bookJSON = JSON.stringify({ title, author, yearPublication });
 
-            if (this.bookData) {
-                await BookService.update(this.bookData.id, bookJSON);
-                loadBooksPage();
+                if (this.bookData) {
+                    await BookService.update(this.bookData.id, bookJSON);
+                    loadBooksPage();
+                }
+                else {
+                    await BookService.register(bookJSON);
+                    loadBooksPage();
+                }
             }
-            else {
-                await BookService.register(bookJSON);
-                loadBooksPage();
+            catch (error) {
+                showErrorMsg((error as Error).message);
             }
         })
     }

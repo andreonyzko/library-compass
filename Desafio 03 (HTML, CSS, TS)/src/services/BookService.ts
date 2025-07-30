@@ -1,3 +1,4 @@
+import { ResponseHandler } from "../utils/ErrorHandler";
 import type { BookType } from "./Types";
 
 const API_URL = 'http://localhost:8080/api/livros';
@@ -21,7 +22,7 @@ class BookService{
             }
         )
 
-        return resp;
+        return await ResponseHandler(resp);
     }
 
     static async update(bookId: number, bookJSON: string){
@@ -36,7 +37,7 @@ class BookService{
             }
         )
 
-        return resp;
+        return await ResponseHandler(resp);
     }
 
     static async delete(bookId: number){
@@ -46,7 +47,7 @@ class BookService{
             }
         )
 
-        return resp;
+        return await ResponseHandler(resp);
     }
 
     static async loan(bookId: number, userId: number){
@@ -56,7 +57,7 @@ class BookService{
             }
         );
         
-        return resp;
+        return await ResponseHandler(resp);
     }
 
     static async giveback(bookId: number){
@@ -66,6 +67,6 @@ class BookService{
             }
         );
 
-        return resp;
+        return await ResponseHandler(resp);
     }
 }

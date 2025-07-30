@@ -8,9 +8,10 @@ import { loadUsersPage } from "../main";
 import type { UserType } from "../services/Types";
 import Title from "../ui/Title";
 import UserLoans from "../ui/UserLoans";
+import { showErrorMsg } from "../utils/ErrorHandler";
 
 export default
-class User extends Component{
+    class User extends Component {
     private loansBtn: HTMLButtonElement;
     private editBtn: HTMLButtonElement;
     private deleteBtn: HTMLButtonElement;
@@ -18,7 +19,7 @@ class User extends Component{
     constructor(
         private root: HTMLElement,
         private userData: UserType,
-    ){
+    ) {
         super('user-template');
         this.loansBtn = this.element.querySelector('.user-loans-btn')! as HTMLButtonElement;
         this.editBtn = this.element.querySelector('.edit-user-btn')! as HTMLButtonElement;
@@ -27,22 +28,22 @@ class User extends Component{
         this.renderContent();
     }
 
-    async renderContent(){
+    async renderContent() {
         this.element.querySelector('.username')!.textContent = this.userData.name;
 
         const loansAmount = (await UserService.getLoans(this.userData.id)).length;
-        if(loansAmount > 0){
+        if (loansAmount > 0) {
             this.deleteBtn.style.display = 'none';
         }
-        else{
+        else {
             this.loansBtn.style.display = 'none'
         }
 
         this.configure();
     }
 
-    configure(){
-        if(this.loansBtn.style.display !== 'none'){
+    configure() {
+        if (this.loansBtn.style.display !== 'none') {
             this.loansBtn.addEventListener('click', () => {
                 Router.render([
                     new Title(`${this.userData.name}'s Loans`).element,
@@ -55,17 +56,22 @@ class User extends Component{
             Router.render([new UserForm(this.userData).element]);
         })
 
-        if(this.deleteBtn.style.display !== 'none'){
+        if (this.deleteBtn.style.display !== 'none') {
             this.deleteBtn.addEventListener('click', async () => {
-                await UserService.delete(this.userData.id);
-                loadUsersPage();
+                try {
+                    await UserService.delete(this.userData.id);
+                    loadUsersPage();
+                }
+                catch (error) {
+                    showErrorMsg((error as Error).message);
+                }
             })
         }
 
         this.attach();
     }
 
-    attach(){
+    attach() {
         this.root.appendChild(this.element);
     }
 }

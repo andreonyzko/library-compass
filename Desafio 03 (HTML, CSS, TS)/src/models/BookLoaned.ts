@@ -2,6 +2,7 @@ import Book from "./Book";
 import BookService from "../services/BookService";
 
 import { loadUsersPage } from "../main";
+import { showErrorMsg } from "../utils/ErrorHandler";
 
 export default
     class BookLoaned extends Book {
@@ -15,8 +16,13 @@ export default
     configure(): void {
         if (this.giveBackBtn.style.display !== 'none') {
             this.giveBackBtn.addEventListener('click', async () => {
-                await BookService.giveback(this.bookData.id);
-                loadUsersPage();
+                try {
+                    await BookService.giveback(this.bookData.id);
+                    loadUsersPage();
+                }
+                catch (error) {
+                    showErrorMsg((error as Error).message);
+                }
             })
         }
 
