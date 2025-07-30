@@ -4,6 +4,7 @@ import BookService from "../services/BookService";
 import { loadBooksPage } from "../main";
 import type { BookType } from "../services/Types";
 import { showErrorMsg } from "../utils/ErrorHandler";
+import ValidateBookForm from "../utils/ValidateBookForm";
 
 export default
     class BookForm extends Component {
@@ -42,6 +43,8 @@ export default
                 const title = this.titleInput.value;
                 const author = this.authorInput.value;
                 const yearPublication = this.yearInput.value;
+                ValidateBookForm(title, author, +yearPublication);
+
                 const bookJSON = JSON.stringify({ title, author, yearPublication });
 
                 if (this.bookData) {

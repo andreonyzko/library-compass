@@ -5,6 +5,7 @@ import UserService from "../services/UserService";
 import { loadUsersPage } from "../main";
 import type { UserType } from "../services/Types";
 import { showErrorMsg } from "../utils/ErrorHandler";
+import ValidateUserForm from "../utils/ValidateUserForm";
 
 export default
     class UserForm extends Component {
@@ -32,6 +33,8 @@ export default
                 e.preventDefault();
 
                 const name = this.nameInput.value;
+                ValidateUserForm(name);
+
                 const userJSON = JSON.stringify({ name });
 
                 if (this.userData) {
