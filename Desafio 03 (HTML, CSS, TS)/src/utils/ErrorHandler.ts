@@ -1,6 +1,6 @@
 export async function ResponseHandler(response: Response) {
+    const content = response.headers.get('Content-Type');
     if (!response.ok) {
-        const content = response.headers.get('Content-Type');
         let errorMsg = `Erro ${response.status}`
 
         if (content && content.includes('application/json')) {
@@ -11,7 +11,12 @@ export async function ResponseHandler(response: Response) {
         throw new Error(errorMsg);
     }
 
-    return response.json();
+    if(content && content.includes('application/json')){
+        return await response.json();
+    }
+    else{
+        return await response.text();
+    }
 }
 
 export function showErrorMsg(message: string) {
@@ -24,4 +29,8 @@ export function showErrorMsg(message: string) {
 
     errorElement.textContent = message;
     document.querySelector('main')!.prepend(errorElement);
+
+    setTimeout(() => {
+        errorElement.remove();
+    }, 5000)
 }

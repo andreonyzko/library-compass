@@ -9,6 +9,7 @@ import { loadBooksPage } from "../main";
 import type { BookType } from "../services/Types";
 import { BookStatus } from "../utils/BookStatus";
 import { showErrorMsg } from "../utils/ErrorHandler";
+import Feedback from "../utils/Feedback";
 
 
 export default
@@ -60,6 +61,7 @@ export default
                 try {
                     await BookService.giveback(this.bookData.id);
                     loadBooksPage();
+                    Feedback('Book returned successfully!');
                 }
                 catch (error) {
                     showErrorMsg((error as Error).message);
@@ -76,6 +78,7 @@ export default
                 try {
                     await BookService.delete(this.bookData.id);
                     loadBooksPage();
+                    Feedback('Book deleted successfully!');
                 }
                 catch (error) {
                     showErrorMsg((error as Error).message);

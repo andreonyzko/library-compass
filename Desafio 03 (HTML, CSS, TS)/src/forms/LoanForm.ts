@@ -5,6 +5,7 @@ import UserService from "../services/UserService";
 
 import { loadBooksPage } from "../main";
 import { showErrorMsg } from "../utils/ErrorHandler";
+import Feedback from "../utils/Feedback";
 
 export default
     class LoanForm extends Component {
@@ -41,6 +42,7 @@ export default
                 await BookService.loan(this.bookId, userId);
 
                 loadBooksPage();
+                Feedback('Book loaned successfully!');
             }
             catch (error) {
                 showErrorMsg((error as Error).message);

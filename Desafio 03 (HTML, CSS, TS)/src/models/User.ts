@@ -9,6 +9,7 @@ import type { UserType } from "../services/Types";
 import Title from "../ui/Title";
 import UserLoans from "../ui/UserLoans";
 import { showErrorMsg } from "../utils/ErrorHandler";
+import Feedback from "../utils/Feedback";
 
 export default
     class User extends Component {
@@ -61,6 +62,7 @@ export default
                 try {
                     await UserService.delete(this.userData.id);
                     loadUsersPage();
+                    Feedback('User deleted successfully!');
                 }
                 catch (error) {
                     showErrorMsg((error as Error).message);

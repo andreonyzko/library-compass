@@ -5,6 +5,7 @@ import { loadBooksPage } from "../main";
 import type { BookType } from "../services/Types";
 import { showErrorMsg } from "../utils/ErrorHandler";
 import ValidateBookForm from "../utils/ValidateBookForm";
+import Feedback from "../utils/Feedback";
 
 export default
     class BookForm extends Component {
@@ -50,10 +51,12 @@ export default
                 if (this.bookData) {
                     await BookService.update(this.bookData.id, bookJSON);
                     loadBooksPage();
+                    Feedback('Book updated successfully!');
                 }
                 else {
                     await BookService.register(bookJSON);
                     loadBooksPage();
+                    Feedback('Book registered successfully!');
                 }
             }
             catch (error) {

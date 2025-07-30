@@ -6,6 +6,8 @@
     --yellow: #FFCD00;
     --light-yellow: #FFE680;
     --grey: #4D4D4D;
+    --green: #80FF93;
+    --red: #FF8F80;
 
     --primary-font: 'Raleway', serif;
 }
@@ -23,8 +25,15 @@ button {
     cursor: pointer;
 }
 
+#feedback-msg{
+    background-color: var(--green);
+    text-align: center;
+    padding: 10px 20px !important;
+    margin: 0 !important;
+}
+
 #error-msg {
-    background-color: red;
+    background-color: var(--red);
     text-align: center;
     padding: 10px 20px !important;
     margin: 0 !important;

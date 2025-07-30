@@ -3,6 +3,7 @@ import BookService from "../services/BookService";
 
 import { loadUsersPage } from "../main";
 import { showErrorMsg } from "../utils/ErrorHandler";
+import Feedback from "../utils/Feedback";
 
 export default
     class BookLoaned extends Book {
@@ -19,6 +20,7 @@ export default
                 try {
                     await BookService.giveback(this.bookData.id);
                     loadUsersPage();
+                    Feedback('Book returned successfully!');
                 }
                 catch (error) {
                     showErrorMsg((error as Error).message);

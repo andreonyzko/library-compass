@@ -6,6 +6,7 @@ import { loadUsersPage } from "../main";
 import type { UserType } from "../services/Types";
 import { showErrorMsg } from "../utils/ErrorHandler";
 import ValidateUserForm from "../utils/ValidateUserForm";
+import Feedback from "../utils/Feedback";
 
 export default
     class UserForm extends Component {
@@ -40,10 +41,12 @@ export default
                 if (this.userData) {
                     await UserService.update(this.userData.id, userJSON);
                     loadUsersPage();
+                    Feedback('User updated successfully!');
                 }
                 else {
                     await UserService.register(userJSON);
                     loadUsersPage();
+                    Feedback('User registered successfully!');
                 }
             }
             catch (error) {
