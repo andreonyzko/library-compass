@@ -1,3 +1,5 @@
+import '../styles/style.css';
+
 import Nav from "./ui/Nav";
 import Router from "./router/Router";
 
