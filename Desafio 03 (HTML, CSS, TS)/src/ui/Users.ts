@@ -1,29 +1,40 @@
 import Component from "../base/Component";
 
 import User from "../models/User";
+import type { UserType } from "../services/Types";
 import UserService from "../services/UserService";
+import { AutoBind } from "../utils/Autobind";
 import { showErrorMsg } from "../utils/ErrorHandler";
 
-export default
-    class Users extends Component {
+export default class Users extends Component {
+    private users: UserType[] = [];
+
     constructor() {
         super('users-template');
         this.getUsers();
+        window.addEventListener('search', (e) => this.filter(e));
     }
 
     private async getUsers() {
         try {
-            const users = await UserService.getAll();
-            this.renderUsers(users);
+            this.users = await UserService.getAll();
+            this.renderUsers(this.users);
         }
         catch (error) {
             showErrorMsg((error as Error).message);
         }
     }
 
+    @AutoBind
+    private filter(e: Event){
+        const query = (e as CustomEvent).detail;
+        const result = this.users.filter(user => user.name.toLowerCase().includes(query));
+        this.renderUsers(result);
+    }
+
     private renderUsers(users: any[]) {
         if (users.length === 0) {
-            this.element.querySelector('.load-message')!.textContent = 'No users found';
+            this.element.innerHTML= '<p class="load-message">No users found!</p>';
             return;
         };
 
