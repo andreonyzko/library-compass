@@ -11,6 +11,7 @@
         gap: 5px;
 
         .book-img-container {
+            overflow: hidden;
             position: relative;
             margin-bottom: 10px;
 

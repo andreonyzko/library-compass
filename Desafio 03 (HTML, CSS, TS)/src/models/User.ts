@@ -54,6 +54,7 @@ export default
                 ])
 
                 document.querySelector('#add-btn')!.remove();
+                document.querySelector('#filter-status')!.remove();
             })
         }
 
