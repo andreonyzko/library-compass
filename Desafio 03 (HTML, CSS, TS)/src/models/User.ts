@@ -10,6 +10,7 @@ import Title from "../ui/Title";
 import UserLoans from "../ui/UserLoans";
 import { showErrorMsg } from "../utils/ErrorHandler";
 import Feedback from "../utils/Feedback";
+import ToolBar from "../ui/Toolbar";
 
 export default
     class User extends Component {
@@ -48,8 +49,11 @@ export default
             this.loansBtn.addEventListener('click', () => {
                 Router.render([
                     new Title(`${this.userData.name}'s Loans`).element,
+                    new ToolBar('books').element,
                     new UserLoans(this.userData.id).element
                 ])
+
+                document.querySelector('#add-btn')!.remove();
             })
         }
 
