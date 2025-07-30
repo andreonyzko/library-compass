@@ -9,13 +9,13 @@ export default
     class BookLoaned extends Book {
     renderContent(): void {
         super.renderContent();
-        this.loanBtn.style.display = 'none';
-        this.editBtn.style.display = 'none';
-        this.deleteBtn.style.display = 'none';
+        this.loanBtn.remove();
+        this.editBtn.remove();
+        this.deleteBtn.remove();
     }
 
     configure(): void {
-        if (this.giveBackBtn.style.display !== 'none') {
+        if (this.giveBackBtn) {
             this.giveBackBtn.addEventListener('click', async () => {
                 try {
                     await BookService.giveback(this.bookData.id);

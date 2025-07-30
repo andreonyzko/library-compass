@@ -34,17 +34,17 @@ export default
 
         const loansAmount = (await UserService.getLoans(this.userData.id)).length;
         if (loansAmount > 0) {
-            this.deleteBtn.style.display = 'none';
+            this.deleteBtn.remove();
         }
         else {
-            this.loansBtn.style.display = 'none'
+            this.loansBtn.remove();
         }
 
         this.configure();
     }
 
     configure() {
-        if (this.loansBtn.style.display !== 'none') {
+        if (this.loansBtn) {
             this.loansBtn.addEventListener('click', () => {
                 Router.render([
                     new Title(`${this.userData.name}'s Loans`).element,
@@ -57,7 +57,7 @@ export default
             Router.render([new UserForm(this.userData).element]);
         })
 
-        if (this.deleteBtn.style.display !== 'none') {
+        if (this.deleteBtn) {
             this.deleteBtn.addEventListener('click', async () => {
                 try {
                     await UserService.delete(this.userData.id);

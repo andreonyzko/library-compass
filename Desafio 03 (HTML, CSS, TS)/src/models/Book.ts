@@ -38,25 +38,25 @@ export default
 
         if (this.bookData.status === BookStatus.AVAILABLE) {
             this.element.querySelector('.book-status')!.textContent = 'AVAILABLE';
-            this.giveBackBtn.style.display = 'none';
+            this.giveBackBtn.remove();
         }
         else {
             this.element.querySelector('.book-status')!.textContent = 'LOANED';
-            this.loanBtn.style.display = 'none';
-            this.deleteBtn.style.display = 'none';
+            this.loanBtn.remove();
+            this.deleteBtn.remove();
         }
 
         this.configure();
     }
 
     configure() {
-        if (this.loanBtn.style.display !== 'none') {
+        if (this.loanBtn) {
             this.loanBtn.addEventListener('click', async () => {
                 Router.render([new LoanForm(this.bookData.id).element]);
             })
         }
 
-        if (this.giveBackBtn.style.display !== 'none') {
+        if (this.giveBackBtn) {
             this.giveBackBtn.addEventListener('click', async () => {
                 try {
                     await BookService.giveback(this.bookData.id);
@@ -73,7 +73,7 @@ export default
             Router.render([new BookForm(this.bookData).element]);
         })
 
-        if (this.deleteBtn.style.display !== 'none') {
+        if (this.deleteBtn) {
             this.deleteBtn.addEventListener('click', async () => {
                 try {
                     await BookService.delete(this.bookData.id);
