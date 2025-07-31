@@ -1,34 +1,32 @@
 import Book from "./Book";
 import BookService from "../services/BookService";
-
-import { showErrorMsg } from "../utils/ErrorHandler";
-import Feedback from "../utils/Feedback";
+import { showSucessMessage, showErrorMsg } from "../utils/Feedback";
 import type { BookType } from "../services/Types";
 
-export default
-class BookLoaned extends Book {
-    constructor(
-        root: HTMLElement,
-        bookData: BookType,
-        private onGiveback: () => void
-    ){
+export default class BookLoaned extends Book {
+    private onGiveback: () => void; // Callback after return
+
+    constructor(root: HTMLElement, bookData: BookType, onGiveback: () => void ){
         super(root, bookData);
+        this.onGiveback = onGiveback;
     }
 
-    renderContent(): void {
+    // Remove actions buttons: loan, edit and delete
+    protected renderContent(): void {
         super.renderContent();
         this.loanBtn.remove();
         this.editBtn.remove();
         this.deleteBtn.remove();
     }
 
-    configure(): void {
+    // Listen to book return btn and make API request
+    protected configure(): void {
         if (this.giveBackBtn) {
             this.giveBackBtn.addEventListener('click', async () => {
                 try {
                     await BookService.giveback(this.bookData.id);
                     this.onGiveback();
-                    Feedback('Book returned successfully!');
+                    showSucessMessage('Book returned successfully!');
                 }
                 catch (error) {
                     showErrorMsg((error as Error).message);

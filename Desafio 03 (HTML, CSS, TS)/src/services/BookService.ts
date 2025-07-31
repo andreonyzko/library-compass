@@ -1,10 +1,9 @@
-import { ResponseHandler } from "../utils/ErrorHandler";
+import { ResponseHandler } from "../utils/ResponseHandler";
 import type { BookType } from "./Types";
 
 const API_URL = 'http://localhost:8080/api/livros';
 
-export default
-class BookService{
+export default class BookService{
     static async getAll(): Promise<BookType[]> {
         const res = await fetch(API_URL);
         return res.json();

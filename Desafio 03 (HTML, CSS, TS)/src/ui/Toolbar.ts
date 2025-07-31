@@ -1,44 +1,44 @@
 import Component from "../base/Component";
 import Router from "../router/Router";
-
 import BookForm from "../forms/BookForm";
 import UserForm from "../forms/UserForm";
 
-export default
-    class ToolBar extends Component {
+export default class ToolBar extends Component {
     private searchInput: HTMLInputElement;
-    private filterStatus: HTMLInputElement;
     private addBtn: HTMLButtonElement;
+    private page: 'books' | 'users';
 
-    constructor(private page: 'books' | 'users') {
+    constructor(page: 'books' | 'users') {
         super('toolbar-template');
+        this.page = page;
+
         this.searchInput = this.element.querySelector('#search')! as HTMLInputElement;
-        this.filterStatus = this.element.querySelector('#filter-status')! as HTMLInputElement;
         this.addBtn = this.element.querySelector('#add-btn')! as HTMLButtonElement;
 
-        if (this.page === 'books') this.configureBooksPage();
-        else if (this.page === 'users') this.configureUsersPage();
-
-        this.configureSearch();
+        this.configure();
     }
 
-    private configureBooksPage() {
-        this.addBtn.addEventListener('click', () => {
-            Router.render([new BookForm().element]);
-        });
-    }
+    private configure() {
+        // Cancel page reload when submit search form
+        this.searchInput.addEventListener('submit', (e) => {
+            e.preventDefault();
+        })
 
-    private configureUsersPage() {
-        this.element.querySelector('#filter-status')!.remove();
-        this.addBtn.addEventListener('click', () => {
-            Router.render([new UserForm().element]);
-        });
-    }
-
-    private configureSearch() {
+        // Listen to search input and shoot custom event when entered
         this.searchInput.addEventListener('input', (e: Event) => {
             const query = (e.target as HTMLInputElement).value.toLowerCase();
             window.dispatchEvent(new CustomEvent('search', { detail: query }))
         })
+
+        // Show book or user form when click "+" btn
+        this.addBtn.addEventListener('click', () => {
+            if(this.page === 'books') Router.render([new BookForm()]);
+            else Router.render([new UserForm()]);
+        });
+        
+        // Hidden status filter at users page
+        if (this.page === 'users') {
+            this.element.querySelector('#filter-status')!.remove();
+        }
     }
 }

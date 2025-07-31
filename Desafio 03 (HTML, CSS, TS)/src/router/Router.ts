@@ -1,11 +1,12 @@
-export default
-class Router{
+import type Component from "../base/Component";
+
+export default class Router{
     static main = document.querySelector('main')! as HTMLElement;
 
-    static render(elements: HTMLElement[]){
-        this.clearMain();
-        elements.forEach(element => {
-            this.main.appendChild(element);
+    static render(components: Component[]){
+        this.clearMain(); // Clear main content
+        components.forEach(component => {
+            this.main.appendChild(component.element);
         })
     }
 

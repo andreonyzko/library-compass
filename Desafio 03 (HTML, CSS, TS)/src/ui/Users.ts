@@ -1,20 +1,21 @@
 import Component from "../base/Component";
-
 import User from "../models/User";
-import type { UserType } from "../services/Types";
 import UserService from "../services/UserService";
+import type { UserType } from "../services/Types";
 import { AutoBind } from "../utils/Autobind";
-import { showErrorMsg } from "../utils/ErrorHandler";
+import { showErrorMsg } from "../utils/Feedback";
 
 export default class Users extends Component {
     private users: UserType[] = [];
 
     constructor() {
         super('users-template');
+
         this.getUsers();
         window.addEventListener('search', (e) => this.filter(e));
     }
 
+    // Get all users
     private async getUsers() {
         try {
             this.users = await UserService.getAll();
@@ -25,6 +26,7 @@ export default class Users extends Component {
         }
     }
 
+    // Filter users by name when search input entered
     @AutoBind
     private filter(e: Event){
         const query = (e as CustomEvent).detail;
@@ -32,6 +34,7 @@ export default class Users extends Component {
         this.renderUsers(result);
     }
 
+    // Render users
     private renderUsers(users: any[]) {
         if (users.length === 0) {
             this.element.innerHTML= '<p class="load-message">No users found!</p>';

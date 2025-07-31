@@ -1,3 +1,4 @@
+// Handles API response, converting to an error if necessary
 export async function ResponseHandler(response: Response) {
     const content = response.headers.get('Content-Type');
     if (!response.ok) {
@@ -19,18 +20,3 @@ export async function ResponseHandler(response: Response) {
     }
 }
 
-export function showErrorMsg(message: string) {
-    let errorElement = document.getElementById('error-msg');
-
-    if (!errorElement) {
-        errorElement = document.createElement('p');
-        errorElement.id = 'error-msg'
-    }
-
-    errorElement.textContent = message;
-    document.querySelector('main')!.prepend(errorElement);
-
-    setTimeout(() => {
-        errorElement.remove();
-    }, 5000)
-}

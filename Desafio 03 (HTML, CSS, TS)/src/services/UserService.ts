@@ -1,11 +1,10 @@
-import { ResponseHandler } from "../utils/ErrorHandler";
+import { ResponseHandler } from "../utils/ResponseHandler";
 import type { UserType } from "./Types";
 import type { BookType } from "./Types";
 
 const API_URL = 'http://localhost:8080/api/usuarios';
 
-export default
-    class UserService {
+export default class UserService {
     static async getAll(): Promise<UserType[]> {
         const resp = await fetch(API_URL);
 

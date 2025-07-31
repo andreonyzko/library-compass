@@ -1,26 +1,27 @@
 import Component from "../base/Component";
-
 import BookService from "../services/BookService";
 import UserService from "../services/UserService";
-
 import { loadBooksPage } from "../main";
-import { showErrorMsg } from "../utils/ErrorHandler";
-import Feedback from "../utils/Feedback";
+import { showSucessMessage, showErrorMsg } from "../utils/Feedback";
 
-export default
-    class LoanForm extends Component {
+export default class LoanForm extends Component {
+    private bookId: number;
     private form: HTMLFormElement;
     private userSelect: HTMLSelectElement;
 
-    constructor(private bookId: number) {
+    constructor(bookId: number) {
         super('loan-form-template');
+        this.bookId = bookId;
+
+        // Get form and select elements
         this.form = this.element.querySelector('form')! as HTMLFormElement;
         this.userSelect = this.element.querySelector('select')! as HTMLSelectElement;
 
         this.renderContent();
     }
 
-    async renderContent() {
+    // Populate select with all users registered
+    private async renderContent() {
         const users = await UserService.getAll();
 
         users.forEach(user => {
@@ -33,7 +34,8 @@ export default
         this.configure();
     }
 
-    configure() {
+    // Listen for form submit event and make API request
+    private configure() {
         this.form.addEventListener('submit', async e => {
             try {
                 e.preventDefault();
@@ -42,7 +44,7 @@ export default
                 await BookService.loan(this.bookId, userId);
 
                 loadBooksPage();
-                Feedback('Book loaned successfully!');
+                showSucessMessage('Book loaned successfully!');
             }
             catch (error) {
                 showErrorMsg((error as Error).message);

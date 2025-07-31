@@ -25,7 +25,7 @@ button {
     cursor: pointer;
 }
 
-#feedback-msg{
+#sucess-msg{
     background-color: var(--green);
     text-align: center;
     padding: 10px 20px !important;

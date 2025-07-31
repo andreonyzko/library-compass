@@ -1,11 +1,10 @@
 import Component from "../base/Component";
-
 import Book from "../models/Book";
 import BookService from "../services/BookService";
 import type { BookType } from "../services/Types";
 import { AutoBind } from "../utils/Autobind";
 import { BookStatus } from "../utils/BookStatus";
-import { showErrorMsg } from "../utils/ErrorHandler";
+import { showErrorMsg } from "../utils/Feedback";
 
 export default class Books extends Component {
     private books: BookType[] = [];
@@ -16,6 +15,7 @@ export default class Books extends Component {
         window.addEventListener('search', e => this.filter((e as CustomEvent).detail))
     }
 
+    // Get all book from API
     private async getBooks() {
         try {
             this.books = await BookService.getAll();
@@ -28,6 +28,7 @@ export default class Books extends Component {
         this.configureFilters();
     }
 
+    // Listen to checkboxes status filters
     @AutoBind
     private configureFilters() {
         const availableCheckbox = document.querySelector('#filter-available') as HTMLInputElement;
@@ -38,6 +39,7 @@ export default class Books extends Component {
         })
     }
 
+    // Filter by title and status based on checkboxes and search inputs
     @AutoBind
     private filter(query = '') {
         let result = this.books;
@@ -62,6 +64,7 @@ export default class Books extends Component {
         this.renderBooks(result);
     }
 
+    // Display books at screen
     private renderBooks(books: BookType[]) {
         if (books.length === 0) {
             this.element.innerHTML = '<p class="load-message">No books found!</p>';

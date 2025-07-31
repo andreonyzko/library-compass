@@ -8,25 +8,18 @@ import ToolBar from "./ui/Toolbar";
 import Books from "./ui/Books";
 import Users from "./ui/Users";
 
+// By default load books page
 loadBooksPage();
 
-new Nav((route) => {
-  switch (route) {
-    case 'library':
-      loadBooksPage();
-      break;
-  
-    case 'users':
-      loadUsersPage();
-      break;
-  }
-});
+// Start navegation menu
+new Nav();
 
-// Functions
+// Render books page
 export function loadBooksPage() {
-  Router.render([new Title('Library').element, new ToolBar('books').element, new Books().element]);
+  Router.render([new Title('Library'), new ToolBar('books'), new Books()]);
 }
 
+// Render users page
 export function loadUsersPage() {
-  Router.render([new Title('Users').element, new ToolBar('users').element, new Users().element]);
+  Router.render([new Title('Users'), new ToolBar('users'), new Users()]);
 }

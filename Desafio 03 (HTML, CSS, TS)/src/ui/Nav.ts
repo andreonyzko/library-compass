@@ -1,12 +1,12 @@
+import { loadBooksPage, loadUsersPage } from "../main";
 import { AutoBind } from "../utils/Autobind";
 
-export default
-class Nav{
+export default class Nav {
     private navElement: HTMLElement;
     private menuBtn: HTMLButtonElement;
     private navItems: NodeListOf<HTMLLIElement>;
 
-    constructor(private onNavigate: (route: string) => void){
+    constructor() {
         this.navElement = document.querySelector('nav')! as HTMLElement;
         this.menuBtn = document.getElementById('menu-btn')! as HTMLButtonElement;
         this.navItems = document.querySelectorAll('.nav-item')! as NodeListOf<HTMLLIElement>;
@@ -14,26 +14,37 @@ class Nav{
         this.configure();
     }
 
-    private configure(){
+    // Configure click events on nav items and toggle menu button
+    private configure() {
         this.menuBtn.addEventListener('click', this.toggleMenu);
         this.navItems.forEach(li => {
-            li.addEventListener('click', () => this.changeCurrentPage(li));
+            li.addEventListener('click', () => this.changePage(li));
         });
     }
 
+    // Show/Hidden menu in small screen devices
     @AutoBind
-    private toggleMenu(){
-        if(this.navElement.style.display === 'none') this.navElement.style.display = 'block';
+    private toggleMenu() {
+        if (this.navElement.style.display === 'none') this.navElement.style.display = 'block';
         else this.navElement.style.display = 'none';
     }
 
-    private changeCurrentPage(li: HTMLLIElement){
+    // Change highlight nav item and load page
+    private changePage(li: HTMLLIElement) {
         const previousPage = document.querySelector('.current-page')! as HTMLLIElement;
         previousPage.classList.remove('current-page');
 
         li.classList.add('current-page');
 
         const route = li.dataset.route!;
-        this.onNavigate(route);
+        switch (route) {
+            case 'library':
+                loadBooksPage();
+                break;
+
+            case 'users':
+                loadUsersPage();
+                break;
+        }
     }
 }
