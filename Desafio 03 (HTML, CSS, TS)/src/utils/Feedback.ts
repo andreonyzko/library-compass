@@ -2,7 +2,7 @@ import Modal from "../models/Modal";
 
 const main = document.querySelector('main')! as HTMLElement;
 
-// Display sucess message at the main top for 2.5 seconds
+// Set sucess message
 export function showSucessMessage(message: string) {
     let feedbackElement = document.querySelector('feedback') as HTMLElement;
 
@@ -15,7 +15,7 @@ export function showSucessMessage(message: string) {
     showFeedback(feedbackElement);
 }
 
-// Display visual error message at the main top for 5 seconds
+// Set error message
 export function showErrorMsg(message: string) {
     let feedbackElement = document.querySelector('feedback') as HTMLElement;
 
@@ -28,6 +28,7 @@ export function showErrorMsg(message: string) {
     showFeedback(feedbackElement);
 }
 
+// Display feedback message for 3 seconds
 function showFeedback(feedbackElement: HTMLElement) {
     main.appendChild(feedbackElement);
 
@@ -45,6 +46,7 @@ function showFeedback(feedbackElement: HTMLElement) {
     }, 3000)
 }
 
+// Display confirmation modal
 export function showConfirmModal(): Promise<boolean>{
     return new Promise(resolve => {
         const modal = new Modal();
