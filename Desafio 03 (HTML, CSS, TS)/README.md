@@ -1,11 +1,15 @@
-## INSTRUÇÕES:
-### Instalação
-1- Baixe o repositório do backend (desafio 2)
-2- Baixe este este repositório
+## 📦 Instruções
+
+### 🛠 Instalação
+
+1. Baixe o [repositório do backend (Desafio 2)](https://github.com/andreonyzko/library-compass/tree/main/Desafio%2002%20(Spring%20boot)/library-compass-restapi)
+2. Baixe este repositório (frontend)
+3. Execute o MySQL e crie o banco de dados chamado ‘library’
 
 ---
 
-### Execução 
-1- Inicie a aplicação Spring Boot
-2- Inicie essa aplicação com ```npm run dev``` ou ```npm run build``` e ```npm run preview```
-3- Acesse http://localhost:5173/ (se usou npm run dev) ou http://localhost:4173/ (se usou npm run preview)
+### 🚀 Execução
+
+1. Inicie a aplicação **Spring Boot**
+2. Inicie o frontend com ```npm run build``` e ```npm run preview```
+3. Acesse http://localhost:4173/
