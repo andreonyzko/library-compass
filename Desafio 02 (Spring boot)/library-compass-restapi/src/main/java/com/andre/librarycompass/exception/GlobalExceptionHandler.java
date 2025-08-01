@@ -40,8 +40,7 @@ public class GlobalExceptionHandler {
         StringBuilder erros = new StringBuilder();
         for(FieldError error : e.getBindingResult().getFieldErrors()){
             erros.append(error.getDefaultMessage());
-            erros.append(String.format(" (Chave: %s)", error.getField()));
-            erros.append("; ");
+            erros.append(". ");
         }
 
         ErrorResponse response = new ErrorResponse(
