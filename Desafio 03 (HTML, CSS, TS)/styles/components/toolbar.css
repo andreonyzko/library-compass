@@ -20,6 +20,12 @@
                 gap: 5px;
             }
 
+            &#filter-status{
+                p{
+                    flex-direction: row-reverse;
+                }
+            }
+
             svg {
                 width: 40px;
                 height: 40px;

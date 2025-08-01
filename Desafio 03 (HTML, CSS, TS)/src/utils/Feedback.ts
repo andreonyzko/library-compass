@@ -1,33 +1,42 @@
 // Display sucess message at the main top for 2.5 seconds
 export function showSucessMessage(message: string) {
-    let feedbackElement = document.getElementById('sucess-msg');
+    let feedbackElement = document.querySelector('feedback') as HTMLElement;
 
     if (!feedbackElement) {
-        feedbackElement = document.createElement('p');
-        feedbackElement.id = 'sucess-msg'
+        feedbackElement = document.createElement('p') as HTMLElement;
+        feedbackElement.classList.add('feedback', 'sucess-msg');
     }
 
     feedbackElement.textContent = message;
-    document.querySelector('main')!.prepend(feedbackElement);
-
-    setTimeout(() => {
-        feedbackElement.remove();
-    }, 2500)
+    showFeedback(feedbackElement);
 }
 
 // Display visual error message at the main top for 5 seconds
 export function showErrorMsg(message: string) {
-    let errorElement = document.getElementById('error-msg');
+    let feedbackElement = document.querySelector('feedback') as HTMLElement;
 
-    if (!errorElement) {
-        errorElement = document.createElement('p');
-        errorElement.id = 'error-msg'
+    if (!feedbackElement) {
+        feedbackElement = document.createElement('p') as HTMLElement;
+        feedbackElement.classList.add('feedback', 'error-msg');
     }
 
-    errorElement.textContent = message;
-    document.querySelector('main')!.prepend(errorElement);
+    feedbackElement.textContent = message;
+    showFeedback(feedbackElement);
+}
+
+function showFeedback(feedbackElement: HTMLElement) {
+    document.querySelector('main')!.appendChild(feedbackElement);
+
+    requestAnimationFrame(() => {
+        feedbackElement.classList.add('show-feedback');
+    })
 
     setTimeout(() => {
-        errorElement.remove();
-    }, 5000)
+        feedbackElement.classList.remove('show-feedback');
+
+        setTimeout(() => {
+            feedbackElement.remove();
+        }, 400)
+
+    }, 3000)
 }

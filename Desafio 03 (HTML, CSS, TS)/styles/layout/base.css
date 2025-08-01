@@ -7,7 +7,7 @@
     --light-yellow: #FFE680;
     --grey: #4D4D4D;
     --green: #80FF93;
-    --red: #FF8F80;
+    --red: #fc5757;
 
     --primary-font: 'Raleway', serif;
 }
@@ -23,20 +23,44 @@ body {
 
 button {
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-#sucess-msg{
+button:not(.user-info button):hover {
+    background-color: var(--black) !important;
+    color: var(--yellow) !important;
+    transform: translateY(-2px);
+
+    svg {
+        fill: var(--yellow) !important;
+    }
+}
+
+
+.feedback {
+    position: fixed;
+    border-radius: 10px 10px 0 10px;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px 40px !important;
+    margin: 0 !important;
+
+    transform: translateY(20px);
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.feedback.show-feedback {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feedback.sucess-msg {
     background-color: var(--green);
-    text-align: center;
-    padding: 10px 20px !important;
-    margin: 0 !important;
 }
 
-#error-msg {
+.feedback.error-msg {
     background-color: var(--red);
-    text-align: center;
-    padding: 10px 20px !important;
-    margin: 0 !important;
 }
 
 .load-message {
