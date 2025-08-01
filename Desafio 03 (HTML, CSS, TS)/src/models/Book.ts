@@ -6,7 +6,7 @@ import BookService from "../services/BookService";
 import { loadBooksPage } from "../main";
 import type { BookType } from "../services/Types";
 import { BookStatus } from "../utils/BookStatus";
-import { showSucessMessage, showErrorMsg } from "../utils/Feedback";
+import { showSucessMessage, showErrorMsg, showConfirmModal } from "../utils/Feedback";
 
 export default class Book extends Component {
     private root: HTMLElement;
@@ -81,9 +81,11 @@ export default class Book extends Component {
         if (this.deleteBtn) {
             this.deleteBtn.addEventListener('click', async () => {
                 try {
-                    await BookService.delete(this.bookData.id);
-                    loadBooksPage();
-                    showSucessMessage('Book deleted successfully!');
+                    if (await showConfirmModal()) {
+                        await BookService.delete(this.bookData.id);
+                        loadBooksPage();
+                        showSucessMessage('Book deleted successfully!');
+                    }
                 }
                 catch (error) {
                     showErrorMsg((error as Error).message);

@@ -51,6 +51,19 @@
     <h1></h1>
   </template>
 
+  <template id="modal-template">
+    <dialog class="modal">
+      <div class="modal-content">
+        <h1></h1>
+        <p></p>
+        <div class="modal-buttons">
+          <button class="confirm-btn">Confirm</button>
+          <button class="cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </dialog>
+  </template>
+
   <template id="toolbar-template">
     <section id="toolbar">
       <form>
@@ -89,40 +102,40 @@
 
   <template id="book-template">
     <article class="book">
-        <div class="book-img-container">
-          <img src="/images/book.png" alt="book image">
+      <div class="book-img-container">
+        <img src="/images/book.png" alt="book image">
 
-          <div class="books-actions">
-            <button class="giveback-book-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
-                <path
-                  d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z" />
-              </svg>
-            </button>
-            <button class="loan-book-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
-                <path
-                  d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM208-800h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Z" />
-              </svg>
-            </button>
-            <button class="edit-book-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
-                <path
-                  d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
-              </svg>
-            </button>
-            <button class="delete-book-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
-                <path
-                  d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
-              </svg>
-            </button>
-          </div>
+        <div class="books-actions">
+          <button class="giveback-book-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+              <path
+                d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z" />
+            </svg>
+          </button>
+          <button class="loan-book-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+              <path
+                d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM208-800h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Z" />
+            </svg>
+          </button>
+          <button class="edit-book-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+              <path
+                d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+            </svg>
+          </button>
+          <button class="delete-book-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+              <path
+                d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z" />
+            </svg>
+          </button>
         </div>
-        <h2 class="book-title">Book Title</h2>
-        <p>By <span class="book-author">Author</span> (<span class="book-year">2025</span>)</p>
-        <p class="book-status">LOANED</p>
-      </article>
+      </div>
+      <h2 class="book-title">Book Title</h2>
+      <p>By <span class="book-author">Author</span> (<span class="book-year">2025</span>)</p>
+      <p class="book-status">LOANED</p>
+    </article>
   </template>
 
   <template id="book-form-template">
@@ -146,14 +159,14 @@
 
   <template id="user-template">
     <article class="user">
-        <img src="/images/user.png" alt="user image">
-        <div class="user-info">
-          <p class="username">User</p>
-          <button class="user-loans-btn">See loans</button> <br>
-          <button class="edit-user-btn">Update</button>
-          <button class="delete-user-btn">Delete</button>
-        </div>
-      </article>
+      <img src="/images/user.png" alt="user image">
+      <div class="user-info">
+        <p class="username">User</p>
+        <button class="user-loans-btn">See loans</button> <br>
+        <button class="edit-user-btn">Update</button>
+        <button class="delete-user-btn">Delete</button>
+      </div>
+    </article>
   </template>
 
   <template id="user-form-template">

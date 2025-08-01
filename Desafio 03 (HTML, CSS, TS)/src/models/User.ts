@@ -7,7 +7,7 @@ import UserService from "../services/UserService";
 import UserLoans from "../ui/UserLoans";
 import { loadUsersPage } from "../main";
 import type { UserType } from "../services/Types";
-import { showSucessMessage ,showErrorMsg } from "../utils/Feedback";
+import { showSucessMessage, showErrorMsg, showConfirmModal } from "../utils/Feedback";
 
 export default class User extends Component {
     private root: HTMLElement;
@@ -70,9 +70,11 @@ export default class User extends Component {
         if (this.deleteBtn) {
             this.deleteBtn.addEventListener('click', async () => {
                 try {
-                    await UserService.delete(this.userData.id);
-                    loadUsersPage();
-                    showSucessMessage('User deleted successfully!');
+                    if (await showConfirmModal()) {
+                        await UserService.delete(this.userData.id);
+                        loadUsersPage();
+                        showSucessMessage('User deleted successfully!');
+                    }
                 }
                 catch (error) {
                     showErrorMsg((error as Error).message);
