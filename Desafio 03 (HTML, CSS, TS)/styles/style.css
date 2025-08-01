@@ -4,6 +4,9 @@
 @import url('layout/header.css') layer(layout);
 @import url('layout/main.css') layer(layout);
 
+@import url('components/buttons.css') layer(components);
+@import url('components/messages.css') layer(components);
+@import url('components/modal.css') layer(components);
 @import url('components/toolbar.css') layer(components);
 @import url('components/forms.css') layer(components);
 @import url('components/books.css') layer(components);

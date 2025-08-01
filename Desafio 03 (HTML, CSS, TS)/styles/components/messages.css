@@ -1,0 +1,30 @@
+.feedback {
+    position: fixed;
+    border-radius: 10px 10px 0 10px;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px 40px !important;
+    margin: 0 !important;
+
+    transform: translateY(20px);
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.feedback.show-feedback {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feedback.sucess-msg {
+    background-color: var(--green);
+}
+
+.feedback.error-msg {
+    background-color: var(--red);
+}
+
+.load-message {
+    grid-column: span 5;
+    text-align: center;
+}

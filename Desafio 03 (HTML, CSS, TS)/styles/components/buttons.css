@@ -1,0 +1,14 @@
+button {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:not(.user-info button):hover {
+    background-color: var(--black) !important;
+    color: var(--yellow) !important;
+    transform: translateY(-2px) ;
+
+    svg {
+        fill: var(--yellow) !important ;
+    }
+}
